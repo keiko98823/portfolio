@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Keiko Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <canvas id="particles"></canvas>
+
+<div class="container">
+
+
+<aside class="sidebar">
+    <div class="logo">K</div>
+
+    <nav>
+        <ul>
+            <li><a href="#projects">PROJECTS</a></li>
+            <li><a href="#about">ABOUT</a></li>
+            <li><a href="#studio">STUDIO</a></li>
+            <li><a href="#contact">CONTACT</a></li>
+        </ul>
+    </nav>
+
+    
+</aside>
+
+<main class="gallery" id="projects">
+
+    
+
+    <div class="item">
+        <img src="images/lip.png" alt="Lipstick">
+        <div class="overlay">
+            <h3>Lips</h3>
+        </div>
+    </div>
+
+    <div class="item">
+        <img src="images/obake.png" alt="Obake">
+        <div class="overlay">
+            <h3>Obake</h3>
+        </div>
+    </div>
+
+    <div class="item">
+        <img src="images/balloondog.jpg" alt="Balloon Dog">
+        <div class="overlay">
+            <h3>Balloon Dog</h3>
+        </div>
+    </div>
+
+    <div class="item">
+        <img src="images/pumpkins.PNG" alt="Pumpkins">
+        <div class="overlay">
+            <h3>Pumpkins</h3>
+        </div>
+    </div>
+
+    <div class="item">
+        <img src="images/ahiru3.png" alt="Ahiru">
+        <div class="overlay">
+            <h3>Ahiru</h3>
+        </div>
+    </div>
+
+    <div class="item">
+        <img src="images/NeonLogo.png" alt="Neon Logo">
+        <div class="overlay">
+            <h3>Neon Logo</h3>
+        </div>
+    </div>
+
+</main>
+
+
+</div>
+
+<section id="about" class="about-section">
+    <h2>ABOUT</h2>
+
+
+<p>
+    Blenderを使用した3DCG制作を行っています。
+</p>
+
+<p>
+    モデリングからライティング、レンダリングまで一貫して制作しています。
+</p>
+
+<p>
+    現在はWeb制作や3DCG制作を学習しています。
+</p>
+
+<h3>Skills</h3>
+
+<ul>
+    <li>Blender</li>
+    <li>HTML</li>
+    <li>CSS</li>
+    <li>C#</li>
+</ul>
+
+
+</section>
+
+<section id="studio" class="about-section">
+    <h2>STUDIO</h2>
+
+
+<p>
+    3DCG制作を中心に作品づくりを行っています。
+    モデリングやライティングの技術向上に取り組んでいます。
+</p>
+
+
+</section>
+
+<section id="contact" class="about-section">
+    <h2>CONTACT</h2>
+
+
+<p>Email</p>
+
+
+<p>GitHub</p>
+
+
+
+</section>
+
+<!--画像拡大-->
+<div id="lightbox" class="lightbox">
+
+   <div class="lightbox-content">
+
+    <span class="close">&times;</span>
+
+    <div class="image-wrapper">
+
+        <button id="prev-btn" class="nav-btn">&#10094;</button>
+
+        <img id="lightbox-img" src="" alt="">
+
+        <button id="next-btn" class="nav-btn">&#10095;</button>
+
+    </div>
+
+    <div class="info">
+
+        <h2 id="project-title"></h2>
+
+        <p id="project-description"></p>
+
+        <p><strong>制作時間：</strong><span id="project-time"></span></p>
+
+        <p><strong>使用ソフト：</strong><span id="project-software"></span></p>
+
+    </div>
+
+</div>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
