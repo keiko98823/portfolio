@@ -311,7 +311,7 @@ function drawBlob(blob){
         blob.r
     );
 
-    gradient.addColorStop(0, `rgba(${blob.color},0.18)`);
+    gradient.addColorStop(0, `rgba(${blob.color},0.55)`);
     gradient.addColorStop(1, `rgba(${blob.color},0)`);
 
     ctx.fillStyle = gradient;
@@ -325,7 +325,7 @@ function animate(){
 
     ctx.clearRect(0,0,canvas.width,canvas.height);
 
-    ctx.filter = "blur(70px)";
+    ctx.filter = "blur(120px)";
 
     blobs.forEach(blob=>{
 
