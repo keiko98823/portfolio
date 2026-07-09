@@ -236,27 +236,23 @@ z-index:-1;
 
 
 .lightbox-content{
-
     position:relative;
 
-    width:90%;
-    max-width:1200px;
+    width:95%;
+    max-width:1400px;
 
     background:#181818;
-
-    padding:60px;
-
+    padding:50px;
     border-radius:20px;
 
     display:flex;
-    flex-direction:column;
+    flex-direction:row;   /* ← row に変更 */
 
     align-items:center;
+    justify-content:center;
+    gap:60px;
 
-    box-shadow:0 0 50px rgba(0,0,0,.6);
-
-    overflow: visible;
-
+    overflow:visible;
 }
 
 .lightbox-content img{
