@@ -338,17 +338,14 @@ z-index:-1;
 }
 
 .image-wrapper{
-
     position:relative;
 
-    width:100%;
+    width:auto;
+    flex-shrink:0;
 
     display:flex;
     justify-content:center;
     align-items:center;
-
-    margin-bottom:40px;
-
 }
 
 #lightbox-img{
