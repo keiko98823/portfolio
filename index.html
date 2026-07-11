@@ -136,16 +136,18 @@
 <!--画像拡大-->
 <!-- 画像拡大のHTML -->
 <!-- 画像拡大のHTML -->
+<!-- 画像拡大のHTML -->
 <div id="lightbox" class="lightbox">
    <div class="lightbox-content">
     <span class="close">&times;</span>
 
-    <!-- 左ボタンと画像だけをここに残す -->
+    <!-- 左ボタンと画像 -->
     <div class="image-wrapper">
         <button id="prev-btn" class="nav-btn">&#10094;</button>
         <img id="lightbox-img" src="" alt="">
     </div>
 
+    <!-- 文章エリア -->
     <div class="info">
         <h2 id="project-title"></h2>
         <p id="project-description"></p>
@@ -153,14 +155,13 @@
         <p><strong>使用ソフト：</strong><span id="project-software"></span></p>
     </div>
 
-    <!-- ★右ボタンをここに引っ越し！ -->
+    <!-- 右ボタン -->
     <button id="next-btn" class="nav-btn">&#10095;</button>
-   </div>
-</div>
-
-
+   </div> <!-- ← 閉じタグはこれ1つだけ！ -->
+</div> <!-- ← 閉じタグはこれ1つだけ！ -->
 
 <script src="script.js"></script>
+
 
 </body>
 </html>

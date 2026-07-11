@@ -352,8 +352,11 @@ top:-20px;
     }
     
     /* スマホ時はボタンを画面下部や画像の上に調整 */
-    #next-btn {
-        left: auto;
-        right: 10px;
-    }
+ /* 右ボタン：文章も飛び越えて黒いエリア全体の右端へ強制配置 */
+#next-btn {
+    position: absolute;
+    right: 30px; /* 黒枠の右端から内側に30pxの位置に固定 */
+    left: auto;
+    z-index: 99999 !important; /* 最前面に強制表示 */
 }
+
