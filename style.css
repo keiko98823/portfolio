@@ -220,12 +220,11 @@ top:-20px;
     overflow: visible;
 }
 
-/* 画像エリアの枠（ボタンの基準位置になります） */
-/* 画像エリアの枠（画像の実際の幅ぴったりに縮めます） */
+/* 画像エリアの枠（元の一杯に広がる状態に戻します） */
 .image-wrapper {
     position: relative;
-    width: max-content; /* 画像の大きさに合わせて枠を自動で縮める */
-    max-width: 65%; /* テキストエリアを圧迫しないための上限 */
+    width: 65%; 
+    max-width: 800px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -261,19 +260,19 @@ top:-20px;
     z-index: 10;
 }
 
-/* 左ボタンを画像の左フチへ（半分外にはみ出す位置） */
+/* 左ボタン：画像の左フチ */
 #prev-btn {
     left: -30px; 
 }
 
-/* 右ボタンをライトボックスコンテンツ全体の右端へ配置 */
+/* 右ボタン：文章も飛び越えて黒いエリア全体の右端へ強制配置 */
 #next-btn {
-    /* 基準を画像エリアから外し、ライトボックスの右端からの距離にします */
-    position: absolute; 
-    right: 20px; /* ライトボックスの内側右端から20pxの位置（お好みで調整してください） */
     left: auto;
+    right: auto;
+    
+    /* 画像エリアの枠を基準に、黒い背景全体の右端付近（およそ145%の位置）へ配置します */
+    left: 145%; 
 }
-
 .nav-btn:hover {
     background: white;
     color: black;
