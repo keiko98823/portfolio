@@ -341,38 +341,27 @@ z-index:-1;
     gap:25px;
 }
 
-.image-wrapper{
-
-    position:relative;
-
-    width:100%;
-
-    display:flex;
-    justify-content:center;
-    align-items:center;
-
-    margin-bottom:40px;
-
+.image-wrapper {
+    position: relative;
+    width: 70%; /* HTML内のimgに指定されていたwidth: 70%をここに引っ越します */
+    max-width: 900px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 0; /* 下の余白をリセット */
 }
 
-#lightbox-img{
-
-    width:100%;
-    max-width:900px;
-
-    max-height:70vh;
-
-    object-fit:contain;
-
-    border-radius:15px;
-
+#lightbox-img {
+    width: 100%; /* 親のimage-wrapperいっぱいに広げる */
+    max-height: 70vh;
+    object-fit: contain;
+    border-radius: 15px;
 }
 
 /* 1. ボタン共通のスタイル修正 */
 .nav-btn {
     position: absolute;
     top: 50%;
-    /* 縦方向の中央揃えを維持するために必須です */
     transform: translateY(-50%); 
 
     width: 60px;
@@ -385,30 +374,28 @@ z-index:-1;
     cursor: pointer;
     transition: .3s;
     
-    /* ボタンの中の「>」や「<」を中央に配置する記述 */
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 10; /* ボタンが画像の下に隠れないように */
 }
 
 /* 2. 左ボタンの位置（画像の左外側に配置する場合） */
-#prev-btn {
-    left: -40px; /* 位置はお好みで調整してください */
+##prev-btn {
+    left: -30px; 
 }
 
 /* 3. 右ボタンの位置（画像の右外側に配置する場合） */
 #next-btn {
-    /* rightではなく、左ボタンと同じ「画像エリア（.image-wrapper）」の左端から100%の位置を基準にします */
-    left: 100%; 
-    margin-left: -20px; /* 画像の右側に少しはみ出すように調整（お好みで変更可） */
+    right: -30px; 
 }
 
 .nav-btn:hover {
     background: white;
     color: black;
-    /* ホバー時に中央揃えを維持しつつ拡大 */
     transform: translateY(-50%) scale(1.15); 
 }
+
 
 .info{
 
