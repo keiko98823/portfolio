@@ -200,6 +200,10 @@ top:-20px;
 }
 
 /* ポップアップの内枠（横並びのレイアウトの基盤） */
+/* ==================================================
+   ここから下のコードで、現在のCSSの138行目以降を丸ごと置き換えてください
+   ================================================== */
+
 .lightbox-content {
     position: relative;
     width: 90%;
@@ -208,18 +212,18 @@ top:-20px;
     padding: 60px;
     border-radius: 20px;
     display: flex;
-    flex-direction: row; /* 縦並びから横並びに修正 */
+    flex-direction: row; /* 横並びに統一 */
     align-items: center;
     justify-content: center;
-    gap: 40px; /* 画像とテキストの間の余白 */
+    gap: 40px;
     box-shadow: 0 0 50px rgba(0,0,0,.6);
     overflow: visible;
 }
 
-/* 画像エリアの枠（ボタンはこの要素の左右に配置されます） */
+/* 画像エリアの枠（ボタンの基準位置になります） */
 .image-wrapper {
     position: relative;
-    width: 65%; /* 画像エリアの横幅 */
+    width: 65%; /* 画像枠の幅を制限 */
     max-width: 800px;
     display: flex;
     justify-content: center;
@@ -227,16 +231,16 @@ top:-20px;
     flex-shrink: 0;
 }
 
-/* 拡大画像 */
+/* 拡大画像そのもの */
 #lightbox-img {
-    width: 100%;
+    width: 100%; /* 枠いっぱいに広げる */
     max-height: 70vh;
     object-fit: contain;
     border-radius: 15px;
     display: block;
 }
 
-/* 左右切り替えボタン共通 */
+/* 左右ボタンの共通スタイル */
 .nav-btn {
     position: absolute;
     top: 50%;
@@ -256,14 +260,15 @@ top:-20px;
     z-index: 10;
 }
 
-/* 左ボタン */
+/* 左ボタンを画像の左フチへ */
 #prev-btn {
     left: -30px; 
 }
 
-/* 右ボタン（画像の右フチにしっかり固定） */
+/* 右ボタンを画像の右フチへ */
 #next-btn {
     right: -30px; 
+    left: auto; /* 以前のleft指定が残っていた場合のバグ防止 */
 }
 
 .nav-btn:hover {
@@ -274,12 +279,12 @@ top:-20px;
 
 /* 右側のテキストエリア */
 .info {
-    width: 35%; /* テキストエリアの横幅 */
+    width: 35%;
     min-width: 280px;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    text-align: left; /* テキストを左揃えに */
+    text-align: left;
 }
 
 .info h2 {
