@@ -221,10 +221,11 @@ top:-20px;
 }
 
 /* 画像エリアの枠（ボタンの基準位置になります） */
+/* 画像エリアの枠（画像の実際の幅ぴったりに縮めます） */
 .image-wrapper {
     position: relative;
-    width: 65%; /* 画像枠の幅を制限 */
-    max-width: 800px;
+    width: max-content; /* 画像の大きさに合わせて枠を自動で縮める */
+    max-width: 65%; /* テキストエリアを圧迫しないための上限 */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -233,7 +234,7 @@ top:-20px;
 
 /* 拡大画像そのもの */
 #lightbox-img {
-    width: 100%; /* 枠いっぱいに広げる */
+    width: 100%;
     max-height: 70vh;
     object-fit: contain;
     border-radius: 15px;
@@ -260,15 +261,15 @@ top:-20px;
     z-index: 10;
 }
 
-/* 左ボタンを画像の左フチへ */
+/* 左ボタンを画像の左フチへ（半分外にはみ出す位置） */
 #prev-btn {
     left: -30px; 
 }
 
-/* 右ボタンを画像の右フチへ */
+/* 右ボタンを画像の右フチへ（半分外にはみ出す位置） */
 #next-btn {
     right: -30px; 
-    left: auto; /* 以前のleft指定が残っていた場合のバグ防止 */
+    left: auto; 
 }
 
 .nav-btn:hover {
