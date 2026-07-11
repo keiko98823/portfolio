@@ -160,210 +160,87 @@ position:relative;
 top:-20px;
 }
 
-.lightbox{
-    display:none;
-    position:fixed;
-    inset:0;
-    background:rgba(0,0,0,0.9);
-    justify-content:center;
-    align-items:center;
-    z-index:9999;
+/* ==========================================
+   ライトボックス全体のスタイル（ここから差し替え）
+   ========================================== */
+.lightbox {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.9);
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
 }
 
-.close{
-
-    position:fixed;
-
-    top:30px;
-    right:30px;
-
-    width:50px;
-    height:50px;
-
-    display:flex;
-    justify-content:center;
-    align-items:center;
-
-    background:rgba(255,255,255,.2);
-
-    border-radius:50%;
-
-    color:#fff;
-
-    font-size:32px;
-    font-weight:bold;
-
-    cursor:pointer;
-
-    z-index:999999;
-}
-
-.close:hover{
-    background:white;
-    color:#222;
-    transform:scale(1.1);
-}
-
-@keyframes gradientMove{
-    0%{
-        background-position:0% 50%;
-    }
-
-    50%{
-        background-position:100% 50%;
-    }
-
-    100%{
-        background-position:0% 50%;
-    }
-}
-
-#particles{
-position:fixed;
-inset:0;
-width:100%;
-height:100%;
-pointer-events:none;
-z-index:-1;
-}
-
-
-.container,
-.about-section{
-    position:relative;
-    z-index:1;
-}
-
-
-.lightbox-content{
-
-    position:relative;
-
-    width:90%;
-    max-width:1200px;
-
-    background:#181818;
-
-    padding:60px;
-
-    border-radius:20px;
-
-    display:flex;
-    flex-direction:column;
-
-    align-items:center;
-
-    box-shadow:0 0 50px rgba(0,0,0,.6);
-
-    overflow: visible;
-
-}
-
-.lightbox-content img{
-
-    width:70%;
-    max-width:900px;
-
-    border-radius:15px;
-
-    object-fit:contain;
-
-}
-
-.info{
-
-    width:350px;
-
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-
-}
-
-.info h2{
-
-    font-size:44px;
-
-    margin-bottom:25px;
-
-    letter-spacing:2px;
-
-}
-
-.info p{
-    font-size:20px;
-    line-height:2;
-    margin-bottom:20px;
-    color:#ddd;
-}
-
-
-.nav-btn{
-
-    width:60px;
-    height:60px;
-
-    min-width:60px;
-    min-height:60px;
-
-    border:none;
-    border-radius:50%;
-
-    background:rgba(255,255,255,.08);
-
-    color:white;
-
-    font-size:28px;
-    line-height:1;
-
-    display:flex;
-    justify-content:center;
-    align-items:center;
-
-    cursor:pointer;
-
-    transition:.3s;
-
-    flex-shrink:0;
-}
-
-.nav-btn:hover{
-
-    background:white;
-    color:#222;
-
-    transform:scale(1.15);
-
-}
-
-
-.gallery{
-    gap:25px;
-}
-
-.image-wrapper {
-    position: relative;
-    width: 70%; /* HTML内のimgに指定されていたwidth: 70%をここに引っ越します */
-    max-width: 900px;
+/* 閉じるボタン */
+.close {
+    position: fixed;
+    top: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 0; /* 下の余白をリセット */
+    background: rgba(255, 255, 255, .2);
+    border-radius: 50%;
+    color: #fff;
+    font-size: 32px;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 999999;
+    transition: .3s;
 }
 
+.close:hover {
+    background: white;
+    color: #222;
+    transform: scale(1.1);
+}
+
+/* ポップアップの内枠（横並びのレイアウトの基盤） */
+.lightbox-content {
+    position: relative;
+    width: 90%;
+    max-width: 1200px;
+    background: #181818;
+    padding: 60px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: row; /* 縦並びから横並びに修正 */
+    align-items: center;
+    justify-content: center;
+    gap: 40px; /* 画像とテキストの間の余白 */
+    box-shadow: 0 0 50px rgba(0,0,0,.6);
+    overflow: visible;
+}
+
+/* 画像エリアの枠（ボタンはこの要素の左右に配置されます） */
+.image-wrapper {
+    position: relative;
+    width: 65%; /* 画像エリアの横幅 */
+    max-width: 800px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+/* 拡大画像 */
 #lightbox-img {
-    width: 100%; /* 親のimage-wrapperいっぱいに広げる */
+    width: 100%;
     max-height: 70vh;
     object-fit: contain;
     border-radius: 15px;
+    display: block;
 }
 
-/* 1. ボタン共通のスタイル修正 */
+/* 左右切り替えボタン共通 */
 .nav-btn {
     position: absolute;
     top: 50%;
     transform: translateY(-50%); 
-
     width: 60px;
     height: 60px;
     border: none;
@@ -373,19 +250,18 @@ z-index:-1;
     font-size: 28px;
     cursor: pointer;
     transition: .3s;
-    
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 10; /* ボタンが画像の下に隠れないように */
+    z-index: 10;
 }
 
-/* 2. 左ボタンの位置（画像の左外側に配置する場合） */
-##prev-btn {
+/* 左ボタン */
+#prev-btn {
     left: -30px; 
 }
 
-/* 3. 右ボタンの位置（画像の右外側に配置する場合） */
+/* 右ボタン（画像の右フチにしっかり固定） */
 #next-btn {
     right: -30px; 
 }
@@ -396,37 +272,25 @@ z-index:-1;
     transform: translateY(-50%) scale(1.15); 
 }
 
-
-.info{
-
-    text-align:center;
-
-    max-width:800px;
-
+/* 右側のテキストエリア */
+.info {
+    width: 35%; /* テキストエリアの横幅 */
+    min-width: 280px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: left; /* テキストを左揃えに */
 }
 
-.info h2{
-
-    font-size:42px;
-
-    margin-bottom:20px;
-
+.info h2 {
+    font-size: 36px;
+    margin-bottom: 20px;
+    letter-spacing: 2px;
 }
 
-.info p{
-
-    font-size:20px;
-
-    line-height:1.8;
-
-    margin-bottom:15px;
-
-    color:#ddd;
-
+.info p {
+    font-size: 18px;
+    line-height: 1.8;
+    margin-bottom: 15px;
+    color: #ddd;
 }
-
-.lightbox-content{
-    position: relative;
-    overflow:visible;
-}
-
