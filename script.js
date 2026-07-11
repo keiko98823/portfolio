@@ -24,6 +24,7 @@ const projects = {
         software: "Blender"
     },
 
+    // ★ここを「pumpkins.png」から「pumpkins.PNG」に修正します！
     "pumpkins.PNG": {
         title: "Pumpkins",
         description: "ハロウィンをイメージした作品です。",

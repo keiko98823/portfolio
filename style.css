@@ -212,12 +212,14 @@ top:-20px;
     padding: 60px;
     border-radius: 20px;
     display: flex;
-    flex-direction: row; /* 横並びに統一 */
+    flex-direction: row;
     align-items: center;
     justify-content: center;
     gap: 40px;
     box-shadow: 0 0 50px rgba(0,0,0,.6);
-    overflow: visible;
+    
+    /* 重要：はみ出たボタンを絶対に隠さない設定 */
+    overflow: visible !important; 
 }
 
 /* 画像エリアの枠（元の一杯に広がる状態に戻します） */
@@ -266,13 +268,17 @@ top:-20px;
 }
 
 /* 右ボタン：文章も飛び越えて黒いエリア全体の右端へ強制配置 */
+/* 右ボタン：引っ越しさせたので、黒枠の右端から20pxの位置に固定されます */
 #next-btn {
+    position: absolute;
+    /* 黒枠の右端から内側に30pxの位置に固定 */
+    right: 30px; 
     left: auto;
-    right: auto;
     
-    /* 画像エリアの枠を基準に、黒い背景全体の右端付近（およそ145%の位置）へ配置します */
-    left: 145%; 
+    /* 他の要素に隠されないように最前面へ */
+    z-index: 99999 !important; 
 }
+
 .nav-btn:hover {
     background: white;
     color: black;
@@ -300,4 +306,54 @@ top:-20px;
     line-height: 1.8;
     margin-bottom: 15px;
     color: #ddd;
+}
+
+@media (max-width: 768px) {
+    /* 縦並びに変更 */
+    .container {
+        flex-direction: column;
+    }
+    
+    /* サイドバーを上部メニューに */
+    .sidebar {
+        width: 100%;
+        padding: 20px;
+        flex-direction: row;
+        align-items: center;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+    }
+    
+    .sidebar ul {
+        display: flex;
+        gap: 15px;
+    }
+    
+    .sidebar li {
+        margin: 0;
+    }
+
+    /* ライトボックスもスマホ用に縦並びへ */
+    .lightbox-content {
+        flex-direction: column;
+        padding: 30px 20px;
+        width: 95%;
+    }
+    
+    .image-wrapper {
+        width: 100%;
+    }
+    
+    .info {
+        width: 100%;
+        text-align: center;
+        margin-top: 20px;
+    }
+    
+    /* スマホ時はボタンを画面下部や画像の上に調整 */
+    #next-btn {
+        left: auto;
+        right: 10px;
+    }
 }
