@@ -368,49 +368,46 @@ z-index:-1;
 
 }
 
-.nav-btn{
+/* 1. ボタン共通のスタイル修正 */
+.nav-btn {
+    position: absolute;
+    top: 50%;
+    /* 縦方向の中央揃えを維持するために必須です */
+    transform: translateY(-50%); 
 
-    position:absolute;
-
-    top:50%;
-
-    transform:translateY(-50%);
-
-    width:60px;
-    height:60px;
-
-    border:none;
-    border-radius:50%;
-
-    background:rgba(255,255,255,.15);
-
-    color:white;
-
-    font-size:28px;
-
-    cursor:pointer;
-
-    transition:.3s;
+    width: 60px;
+    height: 60px;
+    border: none;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, .15);
+    color: white;
+    font-size: 28px;
+    cursor: pointer;
+    transition: .3s;
+    
+    /* ボタンの中の「>」や「<」を中央に配置する記述 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-#prev-btn{
-
-    left:-80px;
-
+/* 2. 左ボタンの位置（画像の左外側に配置する場合） */
+#prev-btn {
+    left: -40px; /* 位置はお好みで調整してください */
 }
 
-#next-btn{
-
-    right:-50px;
-
+/* 3. 右ボタンの位置（画像の右外側に配置する場合） */
+#next-btn {
+    /* rightではなく、左ボタンと同じ「画像エリア（.image-wrapper）」の左端から100%の位置を基準にします */
+    left: 100%; 
+    margin-left: -20px; /* 画像の右側に少しはみ出すように調整（お好みで変更可） */
 }
 
-.nav-btn:hover{
-
-    background:white;
-
-    color:black;
-
+.nav-btn:hover {
+    background: white;
+    color: black;
+    /* ホバー時に中央揃えを維持しつつ拡大 */
+    transform: translateY(-50%) scale(1.15); 
 }
 
 .info{
