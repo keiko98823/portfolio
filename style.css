@@ -99,11 +99,17 @@ body{
     transform:translateY(0);
 }
 
-.item img{
-    width:100%;
-    aspect-ratio:1/1;
-    object-fit:cover;
-    transition:.4s;
+.item img {
+    width: 100%;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    
+    /* ★ transition: .4s; は削除するかコメントアウトします */
+    /* transition: .4s; */
+
+    /* ★ 3Dチルトの立体感を綺麗に表現するための設定を追加 */
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
 }
 
 
