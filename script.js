@@ -257,27 +257,21 @@ const tiltItems = document.querySelectorAll(".item");
 tiltItems.forEach(item => {
     const img = item.querySelector("img");
 
-    // マウスが動いている時
     item.addEventListener("mousemove", (e) => {
         const rect = item.getBoundingClientRect();
         
-        // 要素内でのマウスの相対位置を計算（0〜1）
         const x = (e.clientX - rect.left) / rect.width;
         const y = (e.clientY - rect.top) / rect.height;
 
-        // 傾ける強さ（最大15度）
         const maxTilt = 15;
         const rotateX = (0.5 - y) * maxTilt;
         const rotateY = (x - 0.5) * maxTilt;
 
-        // ★CSSの transition を「none」にして遅延をゼロにし、マウスに完璧に吸い付かせます
         img.style.transition = "none";
         img.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
     });
 
-    // マウスが外れた時
     item.addEventListener("mouseleave", () => {
-        // ★離れた時だけスムーズ（0.5秒）に戻るようにします
         img.style.transition = "transform 0.5s cubic-bezier(0.25, 1, 0.5, 1)";
         img.style.transform = "perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)";
     });
