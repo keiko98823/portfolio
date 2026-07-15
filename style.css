@@ -81,7 +81,6 @@ body{
 .item{
     position:relative;
     
-
     opacity:0;
     transform:translateY(60px);
 
@@ -89,6 +88,10 @@ body{
         opacity .8s ease,
         transform .8s ease,
         box-shadow .4s ease;
+
+    /* ★ここを追加（傾いた画像のはみ出しをカットし、立体感を正しく表現する） */
+    overflow: hidden;
+    transform-style: preserve-3d;
 }
 
 .item.show{
