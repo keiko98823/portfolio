@@ -257,28 +257,28 @@ const tiltItems = document.querySelectorAll(".item");
 tiltItems.forEach(item => {
     const img = item.querySelector("img");
 
+    // マウスが動いている時
     item.addEventListener("mousemove", (e) => {
         const rect = item.getBoundingClientRect();
         
-        // 要素内でのマウスの相対位置を計算（0〜1の範囲）
+        // 要素内でのマウスの相対位置を計算（0〜1）
         const x = (e.clientX - rect.left) / rect.width;
         const y = (e.clientY - rect.top) / rect.height;
 
         // 傾ける強さ（最大15度）
         const maxTilt = 15;
-        
-        // 中心（0.5）からの距離に応じて傾きを計算
         const rotateX = (0.5 - y) * maxTilt;
         const rotateY = (x - 0.5) * maxTilt;
 
-        // 遠近感（perspective）を出しつつ、傾きと微細な拡大（scale）を適用
+        // ★CSSの transition を「none」にして遅延をゼロにし、マウスに完璧に吸い付かせます
+        img.style.transition = "none";
         img.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
-        img.style.transition = "transform 0.1s ease"; // マウスの動きに滑らかに追従させる
     });
 
-    // マウスが外れたら元のまっすぐな状態に戻す
+    // マウスが外れた時
     item.addEventListener("mouseleave", () => {
+        // ★離れた時だけスムーズ（0.5秒）に戻るようにします
+        img.style.transition = "transform 0.5s cubic-bezier(0.25, 1, 0.5, 1)";
         img.style.transform = "perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)";
-        img.style.transition = "transform 0.5s ease"; // スムーズに戻す
     });
 });
