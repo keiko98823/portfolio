@@ -103,8 +103,12 @@ body{
     transition:.4s;
 }
 
-.item:hover img{
-    transform:scale(1.05);
+
+
+/* 元の scale(1.05) を消して、JS側で拡大と傾きを同時に制御できるようにします */
+.item:hover img {
+    /* コメントアウト、または削除 */
+    /* transform: scale(1.05); */ 
 }
 
 .overlay{
@@ -360,19 +364,3 @@ top:-20px;
     z-index: 99999 !important; /* 最前面に強制表示 スマホ対応できず */
 }
 
-/* ライトボックス表示時のアニメーション */
-@keyframes zoomIn {
-    from {
-        opacity: 0;
-        transform: scale(0.9) translateY(20px); /* 最初は少し小さく、下寄りに */
-    }
-    to {
-        opacity: 1;
-        transform: scale(1) translateY(0); /* 通常サイズに戻る */
-    }
-}
-
-/* ライトボックスが開いているときの中身にアニメーションを適用 */
-.lightbox[style*="display: flex"] .lightbox-content {
-    animation: zoomIn 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-}
