@@ -250,29 +250,33 @@ items.forEach(item=>{
 });
 
 // ===============================
-// 3Dチルトエフェクト（画像が立体的に傾く演出）
+// 3Dチルトエフェクト（安全枠付き版）
 // ===============================
-const tiltItems = document.querySelectorAll(".item");
+// ページのHTMLが完全に読み込まれてから実行する設定にします
+window.addEventListener("DOMContentLoaded", () => {
+    const tiltItems = document.querySelectorAll(".item");
 
-tiltItems.forEach(item => {
-    const img = item.querySelector("img");
+    tiltItems.forEach(item => {
+        const img = item.querySelector("img");
+        if (!img) return; // 画像が見つからない場合はスキップ
 
-    item.addEventListener("mousemove", (e) => {
-        const rect = item.getBoundingClientRect();
-        
-        const x = (e.clientX - rect.left) / rect.width;
-        const y = (e.clientY - rect.top) / rect.height;
+        item.addEventListener("mousemove", (e) => {
+            const rect = item.getBoundingClientRect();
+            
+            const x = (e.clientX - rect.left) / rect.width;
+            const y = (e.clientY - rect.top) / rect.height;
 
-        const maxTilt = 15;
-        const rotateX = (0.5 - y) * maxTilt;
-        const rotateY = (x - 0.5) * maxTilt;
+            const maxTilt = 15;
+            const rotateX = (0.5 - y) * maxTilt;
+            const rotateY = (x - 0.5) * maxTilt;
 
-        img.style.transition = "none";
-        img.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
-    });
+            img.style.transition = "none";
+            img.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
+        });
 
-    item.addEventListener("mouseleave", () => {
-        img.style.transition = "transform 0.5s cubic-bezier(0.25, 1, 0.5, 1)";
-        img.style.transform = "perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)";
+        item.addEventListener("mouseleave", () => {
+            img.style.transition = "transform 0.5s cubic-bezier(0.25, 1, 0.5, 1)";
+            img.style.transform = "perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)";
+        });
     });
 });
