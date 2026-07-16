@@ -378,3 +378,70 @@ top:-20px;
     z-index: 99999 !important; /* 最前面に強制表示 スマホ対応できず */
 }
 
+/* ===========================
+   Responsive
+=========================== */
+
+@media (max-width:768px){
+
+    /* 全体を縦並び */
+    .container{
+        flex-direction:column;
+    }
+
+    /* サイドバー */
+    .sidebar{
+        width:100%;
+        padding:20px;
+        justify-content:center;
+        align-items:center;
+    }
+
+    .sidebar ul{
+        display:flex;
+        justify-content:center;
+        gap:20px;
+        flex-wrap:wrap;
+    }
+
+    .sidebar li{
+        margin:0;
+    }
+
+    .logo{
+        margin-bottom:20px;
+    }
+
+    /* ギャラリー */
+
+    .gallery{
+
+        width:100%;
+        padding:20px;
+
+        grid-template-columns:1fr;
+
+        gap:20px;
+    }
+
+    /* ABOUTなど */
+
+    .about-section{
+
+        padding:40px 25px;
+
+    }
+
+    .about-section h2{
+
+        font-size:28px;
+
+    }
+
+    .about-section p{
+
+        font-size:16px;
+
+    }
+
+}
