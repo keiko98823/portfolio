@@ -276,7 +276,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
         item.addEventListener("mouseleave", () => {
             img.style.transition = "transform 0.5s cubic-bezier(0.25, 1, 0.5, 1)";
-            img.style.transform = "perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)";
+            img.style.transform = "rotateX(0deg) rotateY(0deg) scale(1)";
         });
     });
 });
