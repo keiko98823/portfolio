@@ -371,7 +371,7 @@ top:-20px;
 #next-btn{
     position:absolute;
     right:30px;
-    left:auto;
+    left:-30px;
     z-index:99999 !important;
 }
 
