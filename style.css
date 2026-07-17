@@ -63,12 +63,6 @@ body{
     font-size:14px;
 }
 
-.gallery-item img {
-    width: 100%;
-    aspect-ratio: 1 / 1;
-    object-fit: cover;
-    display: block;
-}
 
 .gallery{
     flex:1;
@@ -93,6 +87,8 @@ body{
 
     perspective:1000px;      /* ←追加 */
     transform-style:preserve-3d;
+
+       border-radius:15px;/*追加７・17*/
 }
 
 .item.show{
@@ -333,15 +329,16 @@ top:-20px;
     }
     
     /* サイドバーを上部メニューに */
-    .sidebar {
-        width: 100%;
-        padding: 20px;
-        flex-direction: row;
-        align-items: center;
-        position: sticky;
-        top: 0;
-        z-index: 100;
-    }
+    .sidebar{
+
+    width:100%;
+    padding:20px;
+
+    flex-direction:column;
+
+    align-items:center;
+
+}
     
     .sidebar ul {
         display: flex;
@@ -371,12 +368,15 @@ top:-20px;
     
     /* スマホ時はボタンを画面下部や画像の上に調整 */
  /* 右ボタン：文章も飛び越えて黒いエリア全体の右端へ強制配置 */
-#next-btn {
-    position: absolute;
-    right: 30px; /* 黒枠の右端から内側に30pxの位置に固定 */
-    left: auto;
-    z-index: 99999 !important; /* 最前面に強制表示 スマホ対応できず */
+#next-btn{
+    position:absolute;
+    right:30px;
+    left:auto;
+    z-index:99999 !important;
 }
+
+}   /* ← これを追加して最初の @media を閉じる */
+
 
 /* ===========================
    Responsive
@@ -418,8 +418,7 @@ top:-20px;
 
         width:100%;
         padding:20px;
-
-        grid-template-columns:1fr;
+        grid-template-columns:repeat(2,1fr);
 
         gap:20px;
     }
