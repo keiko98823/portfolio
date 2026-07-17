@@ -371,7 +371,7 @@ top:-20px;
 #next-btn{
     position:absolute;
     right:30px;
-    left:-30px;
+    left:auto;
     z-index:99999 !important;
 }
 
@@ -443,4 +443,16 @@ top:-20px;
 
     }
 
+}
+
+.image-wrapper{
+    position:relative;
+}
+
+#prev-btn{
+    left:10px;
+}
+
+#next-btn{
+    right:10px;
 }
