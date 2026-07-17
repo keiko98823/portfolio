@@ -138,32 +138,24 @@
 <!-- 画像拡大のHTML -->
 <!-- 画像拡大のHTML -->
 <div id="lightbox" class="lightbox">
-   <div id="lightbox" class="lightbox">
+   <div class="image-wrapper">
 
-    <div class="lightbox-content">
+    <button id="prev-btn" class="nav-btn">&#10094;</button>
 
-        <span class="close">&times;</span>
+    <img id="lightbox-img" src="" alt="">
 
-        <div class="image-wrapper">
 
-            <button id="prev-btn" class="nav-btn">&#10094;</button>
-
-            <img id="lightbox-img" src="" alt="">
-
-            <button id="next-btn" class="nav-btn">&#10095;</button>
-
-        </div>
-
-        <div class="info">
-            <h2 id="project-title"></h2>
-            <p id="project-description"></p>
-            <p><strong>制作時間：</strong><span id="project-time"></span></p>
-            <p><strong>使用ソフト：</strong><span id="project-software"></span></p>
-        </div>
-
-    </div>
 
 </div>
+
+    <!-- 文章エリア -->
+    <div class="info">
+        <h2 id="project-title"></h2>
+        <p id="project-description"></p>
+        <p><strong>制作時間：</strong><span id="project-time"></span></p>
+        <p><strong>使用ソフト：</strong><span id="project-software"></span></p>
+    </div>
+
     <!-- 右ボタン -->
     <button id="next-btn" class="nav-btn">&#10095;</button>
    </div> <!-- ← 閉じタグはこれ1つだけ！ -->
