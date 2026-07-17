@@ -287,8 +287,8 @@ top:-20px;
 #next-btn {
     position: absolute;
     /* 黒枠の右端から内側に30pxの位置に固定 */
-    right: 10px; 
-    left: auto; 
+    right: auto; 
+    left: auto; /*変更の必要あり*/
     
     /* 他の要素に隠されないように最前面へ */
     z-index: 99999 !important; 
