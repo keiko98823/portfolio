@@ -288,7 +288,7 @@ top:-20px;
     position: absolute;
     /* 黒枠の右端から内側に30pxの位置に固定 */
     right: 10px; 
-    left: 10px; 
+    left: auto; 
     
     /* 他の要素に隠されないように最前面へ */
     z-index: 99999 !important; 
