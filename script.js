@@ -63,30 +63,31 @@ window.addEventListener("DOMContentLoaded", () => {
     // 作品表示（モーダルを開く）
     // ===============================
     function showProject(index){
-        currentIndex = index;
-        const img = images[currentIndex];
-        if(!img || !lightbox) return;
+    currentIndex = index;
+    const img = images[currentIndex];
+    if(!img || !lightbox) return;
 
-        // 1. まずレイアウトを表示（透明状態）
-        lightbox.style.display = "flex";
+    // 1. 枠を表示（この時点では CSS により opacity: 0）
+    lightbox.style.display = "flex";
 
-        lightboxImg.src = img.src;
-        const fileName = img.src.split("/").pop();
-        const project = projects[fileName];
+    lightboxImg.src = img.src;
+    const fileName = img.src.split("/").pop();
+    const project = projects[fileName];
 
-        if(project){
-            projectTitle.textContent = project.title;
-            projectDescription.textContent = project.description;
-            projectTime.textContent = project.time;
-            projectSoftware.textContent = project.software;
-        }
-
-        // 2. ほんの少し遅らせて .active をつけ、アニメーション発動
-        setTimeout(() => {
-            lightbox.classList.add("active");
-        }, 20);
+    if(project){
+        projectTitle.textContent = project.title;
+        projectDescription.textContent = project.description;
+        projectTime.textContent = project.time;
+        projectSoftware.textContent = project.software;
     }
 
+    // 2. ブラウザの描画準備が整った次のフレームで .active を付与！
+    requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+            lightbox.classList.add("active");
+        });
+    });
+}
     // ===============================
     // 画像クリックで開く
     // ===============================
