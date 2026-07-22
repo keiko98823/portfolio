@@ -75,8 +75,8 @@ body{
 .item{
     position: relative;
 
-    opacity:0;
-    transform:translateY(60px);
+    opacity: 1; /* ← 一時的に 0 から 1 に変更してみる */
+    transform: translateY(0); /* ← 一時的に 60px から 0 に変更してみる */
 
     transition:
         opacity .8s ease,
@@ -85,10 +85,9 @@ body{
 
     overflow:hidden;
 
-    perspective:1000px;      /* ←追加 */
+    perspective:1000px;
     transform-style:preserve-3d;
-
-       border-radius:15px;/*追加７・17*/
+    border-radius:15px;
 }
 
 .item.show{
