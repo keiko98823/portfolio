@@ -480,3 +480,56 @@ top:-20px;
 .project-card:hover::before {
   left: 125%; /* ホバー時に光が左から右へ通過 */
 }
+
+
+/* ==============================================
+   1. モーダル全体（背景の黒半透明カバー）
+   ============================================== */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7); /* 黒半透明 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  /* 初期状態：隠しておく */
+  opacity: 0;
+  visibility: hidden;
+  
+  /* ふわっと変化させる設定（0.3秒） */
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  z-index: 1000;
+}
+
+/* 表示時のクラス */
+.modal.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+
+/* ==============================================
+   2. 中央のコンテンツカード
+   ============================================== */
+.modal-content {
+  background-color: #1a1a1a; /* カードの背景色 */
+  border-radius: 12px;
+  padding: 24px;
+  max-width: 600px;
+  width: 90%;
+  
+  /* 初期状態：少し小さく（奥に）しておく */
+  transform: scale(0.92);
+  
+  /* カードが拡大する動きの設定 */
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* モーダル表示時のカードの状態（手前に拡大） */
+.modal.active .modal-content {
+  transform: scale(1);
+}

@@ -280,3 +280,28 @@ window.addEventListener("DOMContentLoaded", () => {
         });
     });
 });
+
+
+// 要素の取得（ご自身のHTMLのクラス名に合わせて変更してください）
+const modal = document.querySelector('.modal');
+const projectCards = document.querySelectorAll('.project-card'); // 作品カード
+const closeBtn = document.querySelector('.modal-close'); // 閉じるボタン（×）
+
+// 開く処理
+projectCards.forEach(card => {
+  card.addEventListener('click', () => {
+    modal.classList.add('active');
+  });
+});
+
+// 閉じる処理（×ボタンをクリック）
+closeBtn.addEventListener('click', () => {
+  modal.classList.remove('active');
+});
+
+// 閉じる処理（背景の黒い部分をクリックしても閉じたい場合）
+modal.addEventListener('click', (e) => {
+  if (e.target === modal) {
+    modal.classList.remove('active');
+  }
+});
