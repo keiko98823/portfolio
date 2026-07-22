@@ -73,23 +73,28 @@ let currentIndex = 0;
 // 作品表示（アニメーション対応版）
 // ===============================
 
-function showProject(index) {
+// ===============================
+// 作品表示（モーダルを開く）
+// ===============================
+function showProject(index){
     currentIndex = index;
     const img = images[currentIndex];
+
+    // 1. まず枠を画面に配置（この時点では opacity: 0 で透明）
+    lightbox.style.display = "flex";
 
     lightboxImg.src = img.src;
     const fileName = img.src.split("/").pop();
     const project = projects[fileName];
 
-    if (project) {
+    if(project){
         projectTitle.textContent = project.title;
         projectDescription.textContent = project.description;
         projectTime.textContent = project.time;
         projectSoftware.textContent = project.software;
     }
 
-    // display: flex をセットしてから、ほんの少し遅らせて active クラスを付与（アニメーションを発動させる）
-    lightbox.style.display = "flex";
+    // 2. ほんの少し(10ミリ秒)遅らせて .active を付与し、アニメーションを発動！
     setTimeout(() => {
         lightbox.classList.add("active");
     }, 10);
@@ -97,49 +102,34 @@ function showProject(index) {
 
 
 // ===============================
-// 閉じる関数（ふわっと消えるアニメーション）
+// モーダルを閉じる処理
 // ===============================
-
 function closeLightbox() {
-    // 1. まず active クラスを外してふわっと消す
+    // まず .active を外して、ふわっと消えるアニメーションを開始
     lightbox.classList.remove("active");
 
-    // 2. アニメーション（0.3秒）が終わった後に display: none にする
+    // 0.3秒（300ミリ秒）のアニメーション完了後に display: none にする
     setTimeout(() => {
         lightbox.style.display = "none";
     }, 300);
 }
 
-
-// ===============================
-// クリックで表示
-// ===============================
-
-images.forEach((img, index) => {
-    img.addEventListener("click", () => {
-        showProject(index);
-    });
-});
-
-
-// ===============================
-// 閉じるイベント（ボタン・背景・ESCキー）
-// ===============================
-
+// 閉じるイベントの割り当て
 closeBtn.addEventListener("click", closeLightbox);
 
+// 背景クリックで閉じる
 lightbox.addEventListener("click", (e) => {
     if (e.target === lightbox) {
         closeLightbox();
     }
 });
 
+// ESCキーで閉じる
 document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && lightbox.classList.contains("active")) {
+    if (e.key === "Escape") {
         closeLightbox();
     }
 });
-
 
 // ===============================
 // 閉じる
