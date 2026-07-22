@@ -539,29 +539,34 @@ top:-20px;
 
 /* 1. 背景の黒半透明カバー */
 #lightbox {
-  /* 初期状態：透明にしておく */
+  display: none; /* ← これが超重要です！最初は画面から隠します */
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.9);
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+
+  /* アニメーション用：初期状態は透明 */
   opacity: 0;
   transition: opacity 0.3s ease;
 }
 
-/* 表示時（activeクラスがついた時） */
+/* activeクラスがついたら不透明（表示） */
 #lightbox.active {
   opacity: 1;
 }
 
 
-/* 2. 中央のコンテンツカード（#lightbox の中にあるカード要素） */
-/* ※カードを囲んでいる要素のクラス名やタグに合わせて調整してください */
-#lightbox > div, 
-.modal-content {
+/* 2. 中央のコンテンツカード */
+.lightbox-content {
   /* 初期状態：少し小さく（奥に）しておく */
   transform: scale(0.92);
-  /* 吸い付くような滑らかな動き */
+  /* スーッと拡大する滑らかなアニメーション */
   transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* 表示時：手前に拡大（等倍に戻す） */
-#lightbox.active > div,
-#lightbox.active .modal-content {
+/* activeクラスがついたら手前に拡大（等倍に戻す） */
+#lightbox.active .lightbox-content {
   transform: scale(1);
 }
