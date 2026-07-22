@@ -43,7 +43,7 @@ const projects = {
 
 let currentIndex = 0;
 
-// ページの読み込みが完了してから各要素を取得してイベントを設定する
+// ページの読み込みが完了してから処理を実行
 window.addEventListener("DOMContentLoaded", () => {
 
     const images = document.querySelectorAll(".item img");
@@ -59,38 +59,51 @@ window.addEventListener("DOMContentLoaded", () => {
     const prevBtn = document.getElementById("prev-btn");
     const nextBtn = document.getElementById("next-btn");
 
- // ===============================
-// 作品表示（モーダルを開く）
-// ===============================
-function showProject(index){
-    currentIndex = index;
-    const img = images[currentIndex];
-    if(!img || !lightbox) return;
+    // ===============================
+    // 作品表示（モーダルを開く）
+    // ===============================
+    function showProject(index){
+        currentIndex = index;
+        const img = images[currentIndex];
+        if(!img || !lightbox) return;
 
-    lightboxImg.src = img.src;
-    const fileName = img.src.split("/").pop();
-    const project = projects[fileName];
+        // 1. まず確実にモーダルを表示（この時点では opacity: 0）
+        lightbox.style.display = "flex";
 
-    if(project){
-        projectTitle.textContent = project.title;
-        projectDescription.textContent = project.description;
-        projectTime.textContent = project.time;
-        projectSoftware.textContent = project.software;
+        lightboxImg.src = img.src;
+        const fileName = img.src.split("/").pop();
+        const project = projects[fileName];
+
+        if(project){
+            projectTitle.textContent = project.title;
+            projectDescription.textContent = project.description;
+            projectTime.textContent = project.time;
+            projectSoftware.textContent = project.software;
+        }
+
+        // 2. ブラウザが画面を描画した次の瞬間に .active を付与してアニメーション起動！
+        requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+                lightbox.classList.add("active");
+            });
+        });
     }
 
-    // active クラスを付けるだけで表示 ＆ 拡大アニメーションが同時起動します
-    lightbox.classList.add("active");
-}
+    // ===============================
+    // モーダルを閉じる処理
+    // ===============================
+    function closeLightbox() {
+        if(!lightbox) return;
+        
+        // 1. .active を外してふわっと消すアニメーションを開始
+        lightbox.classList.remove("active");
 
-// ===============================
-// モーダルを閉じる処理
-// ===============================
-function closeLightbox() {
-    if(!lightbox) return;
-    
-    // active クラスを外すだけで、自動で縮小しながらふわっと消えます
-    lightbox.classList.remove("active");
-}
+        // 2. 0.3秒のアニメーションが終わった後に確実に非表示(none)にする
+        setTimeout(() => {
+            lightbox.style.display = "none";
+        }, 300);
+    }
+
     // ===============================
     // 画像クリックで開く
     // ===============================
@@ -102,7 +115,7 @@ function closeLightbox() {
     });
 
     // ===============================
-    // 閉じるイベントの登録
+    // 閉じるイベント
     // ===============================
     if(closeBtn) closeBtn.addEventListener("click", closeLightbox);
 
@@ -140,7 +153,7 @@ function closeLightbox() {
     }
 
     document.addEventListener("keydown", (e) => {
-        if (lightbox && !lightbox.classList.contains("active")) return;
+        if (lightbox && lightbox.style.display !== "flex") return;
         if (e.key === "ArrowRight" && nextBtn) nextBtn.click();
         if (e.key === "ArrowLeft" && prevBtn) prevBtn.click();
     });
