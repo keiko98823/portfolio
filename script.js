@@ -59,7 +59,7 @@ window.addEventListener("DOMContentLoaded", () => {
     const prevBtn = document.getElementById("prev-btn");
     const nextBtn = document.getElementById("next-btn");
 
-   // ===============================
+ // ===============================
 // 作品表示（モーダルを開く）
 // ===============================
 function showProject(index){
@@ -78,17 +78,19 @@ function showProject(index){
         projectSoftware.textContent = project.software;
     }
 
-    // クラスをつけるだけで CSSの visibility:visible と opacity:1 が連動して動きます
+    // active クラスを付けるだけで表示 ＆ 拡大アニメーションが同時起動します
     lightbox.classList.add("active");
 }
-    // ===============================
-    // モーダルを閉じる処理
-    // ===============================
-    function closeLightbox() {
-        if(!lightbox) return;
-        lightbox.classList.remove("active");
-    }
 
+// ===============================
+// モーダルを閉じる処理
+// ===============================
+function closeLightbox() {
+    if(!lightbox) return;
+    
+    // active クラスを外すだけで、自動で縮小しながらふわっと消えます
+    lightbox.classList.remove("active");
+}
     // ===============================
     // 画像クリックで開く
     // ===============================
