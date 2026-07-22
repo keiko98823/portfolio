@@ -117,10 +117,10 @@ body{
 
 
 /* 元の scale(1.05) を消して、JS側で拡大と傾きを同時に制御できるようにします */
-.item:hover img {
+/*.item:hover img {
     /* コメントアウト、または削除 */
     /* transform: scale(1.05); */ 
-}
+
 
 .overlay{
     position:absolute;
@@ -531,5 +531,38 @@ top:-20px;
 
 /* モーダル表示時のカードの状態（手前に拡大） */
 .modal.active .modal-content {
+  transform: scale(1);
+}
+
+/* ==============================================
+   ライトボックス（モーダル）アニメーション設定
+   ============================================== */
+
+/* 1. 背景の黒半透明カバー */
+#lightbox {
+  /* 初期状態：透明にしておく */
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+/* 表示時（activeクラスがついた時） */
+#lightbox.active {
+  opacity: 1;
+}
+
+
+/* 2. 中央のコンテンツカード（#lightbox の中にあるカード要素） */
+/* ※カードを囲んでいる要素のクラス名やタグに合わせて調整してください */
+#lightbox > div, 
+.modal-content {
+  /* 初期状態：少し小さく（奥に）しておく */
+  transform: scale(0.92);
+  /* 吸い付くような滑らかな動き */
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* 表示時：手前に拡大（等倍に戻す） */
+#lightbox.active > div,
+#lightbox.active .modal-content {
   transform: scale(1);
 }

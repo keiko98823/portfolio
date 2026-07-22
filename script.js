@@ -69,34 +69,45 @@ const nextBtn = document.getElementById("next-btn");
 
 let currentIndex = 0;
 
-
 // ===============================
-// 作品表示
+// 作品表示（アニメーション対応版）
 // ===============================
 
-function showProject(index){
-
+function showProject(index) {
     currentIndex = index;
-
     const img = images[currentIndex];
 
-    lightbox.style.display = "flex";
-
     lightboxImg.src = img.src;
-
     const fileName = img.src.split("/").pop();
-
     const project = projects[fileName];
 
-    if(project){
-
+    if (project) {
         projectTitle.textContent = project.title;
         projectDescription.textContent = project.description;
         projectTime.textContent = project.time;
         projectSoftware.textContent = project.software;
-
     }
 
+    // display: flex をセットしてから、ほんの少し遅らせて active クラスを付与（アニメーションを発動させる）
+    lightbox.style.display = "flex";
+    setTimeout(() => {
+        lightbox.classList.add("active");
+    }, 10);
+}
+
+
+// ===============================
+// 閉じる関数（ふわっと消えるアニメーション）
+// ===============================
+
+function closeLightbox() {
+    // 1. まず active クラスを外してふわっと消す
+    lightbox.classList.remove("active");
+
+    // 2. アニメーション（0.3秒）が終わった後に display: none にする
+    setTimeout(() => {
+        lightbox.style.display = "none";
+    }, 300);
 }
 
 
@@ -104,14 +115,29 @@ function showProject(index){
 // クリックで表示
 // ===============================
 
-images.forEach((img,index)=>{
-
-    img.addEventListener("click",()=>{
-
+images.forEach((img, index) => {
+    img.addEventListener("click", () => {
         showProject(index);
-
     });
+});
 
+
+// ===============================
+// 閉じるイベント（ボタン・背景・ESCキー）
+// ===============================
+
+closeBtn.addEventListener("click", closeLightbox);
+
+lightbox.addEventListener("click", (e) => {
+    if (e.target === lightbox) {
+        closeLightbox();
+    }
+});
+
+document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && lightbox.classList.contains("active")) {
+        closeLightbox();
+    }
 });
 
 
@@ -282,10 +308,6 @@ window.addEventListener("DOMContentLoaded", () => {
 });
 
 
-// 要素の取得（ご自身のHTMLのクラス名に合わせて変更してください）
-const modal = document.querySelector('.modal');
-const projectCards = document.querySelectorAll('.project-card'); // 作品カード
-const closeBtn = document.querySelector('.modal-close'); // 閉じるボタン（×）
 
 // 開く処理
 projectCards.forEach(card => {
