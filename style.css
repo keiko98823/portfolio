@@ -534,12 +534,12 @@ top:-20px;
 }
 
 /* ==============================================
-   ライトボックス（モーダル）アニメーション設定
+   モーダル（ライトボックス）アニメーション設定
    ============================================== */
 
-/* 1. 背景の黒半透明カバー */
+/* 1. モーダル全体の黒半透明背景 */
 #lightbox {
-  display: none; /* ← これが超重要です！最初は画面から隠します */
+  display: none;
   position: fixed;
   inset: 0;
   background: rgba(0, 0, 0, 0.9);
@@ -547,26 +547,27 @@ top:-20px;
   align-items: center;
   z-index: 9999;
 
-  /* アニメーション用：初期状態は透明 */
+  /* 初期状態：透明にしておく */
   opacity: 0;
+  /* 背景のふわっとした変化（0.3秒） */
   transition: opacity 0.3s ease;
 }
 
-/* activeクラスがついたら不透明（表示） */
+/* activeクラスがついたら不透明（ふわっと表示） */
 #lightbox.active {
   opacity: 1;
 }
 
 
-/* 2. 中央のコンテンツカード */
-.lightbox-content {
+/* 2. 中央のコンテンツ枠（#lightbox の直下にある最初のdiv） */
+#lightbox > div {
   /* 初期状態：少し小さく（奥に）しておく */
   transform: scale(0.92);
-  /* スーッと拡大する滑らかなアニメーション */
+  /* 吸い付くような滑らかな拡大（0.3秒） */
   transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 /* activeクラスがついたら手前に拡大（等倍に戻す） */
-#lightbox.active .lightbox-content {
+#lightbox.active > div {
   transform: scale(1);
 }
