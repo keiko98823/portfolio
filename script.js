@@ -59,16 +59,13 @@ window.addEventListener("DOMContentLoaded", () => {
     const prevBtn = document.getElementById("prev-btn");
     const nextBtn = document.getElementById("next-btn");
 
-    // ===============================
-    // 作品表示（モーダルを開く）
-    // ===============================
-    function showProject(index){
+  // ===============================
+// 作品表示（モーダルを開く）
+// ===============================
+function showProject(index){
     currentIndex = index;
     const img = images[currentIndex];
     if(!img || !lightbox) return;
-
-    // 1. 枠を表示（この時点では CSS により opacity: 0）
-    lightbox.style.display = "flex";
 
     lightboxImg.src = img.src;
     const fileName = img.src.split("/").pop();
@@ -81,14 +78,22 @@ window.addEventListener("DOMContentLoaded", () => {
         projectSoftware.textContent = project.software;
     }
 
-    // 2. ブラウザの描画準備が整った次のフレームで .active を付与！
-    requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
-            lightbox.classList.add("active");
-        });
-    });
+    // JSでstyleをいじらず、CSSのクラス付与だけにする（10ミリ秒遅らせてアニメーション起動）
+    setTimeout(() => {
+        lightbox.classList.add("active");
+    }, 10);
+
+// ===============================
+// モーダルを閉じる処理
+// ===============================
+function closeLightbox() {
+    if(!lightbox) return;
+    
+    // .active を外すだけで、CSSにより自動的にふわっと消えて縮小します
+    lightbox.classList.remove("active");
 }
-    // ===============================
+
+}  // ===============================
     // 画像クリックで開く
     // ===============================
     images.forEach((img, index) => {
