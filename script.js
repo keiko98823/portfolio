@@ -9,36 +9,30 @@ const projects = {
         time: "4時間",
         software: "Blender"
     },
-
     "obake.png": {
         title: "Obake",
         description: "おばけを制作しました。",
         time: "4時間",
         software: "Blender"
     },
-
     "balloondog.jpg": {
         title: "Balloon Dog",
         description: "バルーンアートをリアルな質感で制作しました。",
         time: "6時間",
         software: "Blender"
     },
-
-    // ★ここを「pumpkins.png」から「pumpkins.PNG」に修正します！
     "pumpkins.PNG": {
         title: "Pumpkins",
         description: "ハロウィンをイメージした作品です。",
         time: "5時間",
         software: "Blender"
     },
-
     "ahiru3.png": {
         title: "Ahiru",
         description: "アヒルを制作しました。",
         time: "3時間",
         software: "Blender"
     },
-
     "NeonLogo.png": {
         title: "Neon Logo",
         description: "ネオン風ロゴデザインです。",
@@ -69,18 +63,16 @@ const nextBtn = document.getElementById("next-btn");
 
 let currentIndex = 0;
 
-// ===============================
-// 作品表示（アニメーション対応版）
-// ===============================
 
 // ===============================
-// 作品表示（モーダルを開く）
+// 作品表示（アニメーション対応）
 // ===============================
+
 function showProject(index){
     currentIndex = index;
     const img = images[currentIndex];
 
-    // 1. まず枠を画面に配置（この時点では opacity: 0 で透明）
+    // 1. まず枠を表示（この時点では opacity: 0）
     lightbox.style.display = "flex";
 
     lightboxImg.src = img.src;
@@ -94,7 +86,7 @@ function showProject(index){
         projectSoftware.textContent = project.software;
     }
 
-    // 2. ほんの少し(10ミリ秒)遅らせて .active を付与し、アニメーションを発動！
+    // 2. 10ミリ秒後に .active をつけてフェードイン＆ズームイン発動！
     setTimeout(() => {
         lightbox.classList.add("active");
     }, 10);
@@ -102,20 +94,30 @@ function showProject(index){
 
 
 // ===============================
-// モーダルを閉じる処理
+// 画像クリックでモーダルを開く
 // ===============================
+
+images.forEach((img, index) => {
+    img.addEventListener("click", () => {
+        showProject(index);
+    });
+});
+
+
+// ===============================
+// モーダルを閉じる処理（アニメーション対応）
+// ===============================
+
 function closeLightbox() {
-    // まず .active を外して、ふわっと消えるアニメーションを開始
     lightbox.classList.remove("active");
 
-    // 0.3秒（300ミリ秒）のアニメーション完了後に display: none にする
     setTimeout(() => {
         lightbox.style.display = "none";
     }, 300);
 }
 
 // 閉じるイベントの割り当て
-closeBtn.addEventListener("click", closeLightbox);
+if(closeBtn) closeBtn.addEventListener("click", closeLightbox);
 
 // 背景クリックで閉じる
 lightbox.addEventListener("click", (e) => {
@@ -131,78 +133,25 @@ document.addEventListener("keydown", (e) => {
     }
 });
 
-// ===============================
-// 閉じる
-// ===============================
-
-closeBtn.addEventListener("click",()=>{
-
-    lightbox.style.display="none";
-
-});
-
-
-// 背景クリック
-
-lightbox.addEventListener("click",(e)=>{
-
-    if(e.target===lightbox){
-
-        lightbox.style.display="none";
-
-    }
-
-});
-
-
-// ESCキー
-
-document.addEventListener("keydown",(e)=>{
-
-    if(e.key==="Escape"){
-
-        lightbox.style.display="none";
-
-    }
-
-});
-
 
 // ===============================
-// 前へボタン
+// 前へ・次へボタン
 // ===============================
 
-prevBtn.addEventListener("click",()=>{
-
+prevBtn.addEventListener("click", () => {
     currentIndex--;
-
-    if(currentIndex<0){
-
-        currentIndex=images.length-1;
-
+    if (currentIndex < 0) {
+        currentIndex = images.length - 1;
     }
-
     showProject(currentIndex);
-
 });
 
-
-// ===============================
-// 次へボタン
-// ===============================
-
-nextBtn.addEventListener("click",()=>{
-
+nextBtn.addEventListener("click", () => {
     currentIndex++;
-
-    if(currentIndex>=images.length){
-
-        currentIndex=0;
-
+    if (currentIndex >= images.length) {
+        currentIndex = 0;
     }
-
     showProject(currentIndex);
-
 });
 
 
@@ -210,22 +159,15 @@ nextBtn.addEventListener("click",()=>{
 // キーボード左右キー
 // ===============================
 
-document.addEventListener("keydown",(e)=>{
+document.addEventListener("keydown", (e) => {
+    if (lightbox.style.display !== "flex") return;
 
-    if(lightbox.style.display!=="flex") return;
-
-    if(e.key==="ArrowRight"){
-
+    if (e.key === "ArrowRight") {
         nextBtn.click();
-
     }
-
-    if(e.key==="ArrowLeft"){
-
+    if (e.key === "ArrowLeft") {
         prevBtn.click();
-
     }
-
 });
 
 
@@ -233,48 +175,37 @@ document.addEventListener("keydown",(e)=>{
 // スクロールフェードイン
 // ===============================
 
-const items=document.querySelectorAll(".item");
+const items = document.querySelectorAll(".item");
 
-const observer=new IntersectionObserver((entries)=>{
-
-    entries.forEach(entry=>{
-
-        if(entry.isIntersecting){
-
-            const index=[...items].indexOf(entry.target);
-
-            setTimeout(()=>{
-
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            const index = [...items].indexOf(entry.target);
+            setTimeout(() => {
                 entry.target.classList.add("show");
-
-            },index*120);
-
+            }, index * 120);
             observer.unobserve(entry.target);
-
         }
-
     });
-
-},{
-    threshold:0.2
+}, {
+    threshold: 0.2
 });
 
-items.forEach(item=>{
-
+items.forEach(item => {
     observer.observe(item);
-
 });
 
+
 // ===============================
-// 3Dチルトエフェクト（安全枠付き版）
+// 3Dチルトエフェクト
 // ===============================
-// ページのHTMLが完全に読み込まれてから実行する設定にします
+
 window.addEventListener("DOMContentLoaded", () => {
     const tiltItems = document.querySelectorAll(".item");
 
     tiltItems.forEach(item => {
         const img = item.querySelector("img");
-        if (!img) return; // 画像が見つからない場合はスキップ
+        if (!img) return;
 
         item.addEventListener("mousemove", (e) => {
             const rect = item.getBoundingClientRect();
@@ -295,25 +226,4 @@ window.addEventListener("DOMContentLoaded", () => {
             img.style.transform = "rotateX(0deg) rotateY(0deg) scale(1)";
         });
     });
-});
-
-
-
-// 開く処理
-projectCards.forEach(card => {
-  card.addEventListener('click', () => {
-    modal.classList.add('active');
-  });
-});
-
-// 閉じる処理（×ボタンをクリック）
-closeBtn.addEventListener('click', () => {
-  modal.classList.remove('active');
-});
-
-// 閉じる処理（背景の黒い部分をクリックしても閉じたい場合）
-modal.addEventListener('click', (e) => {
-  if (e.target === modal) {
-    modal.classList.remove('active');
-  }
 });
