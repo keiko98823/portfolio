@@ -59,49 +59,30 @@ window.addEventListener("DOMContentLoaded", () => {
     const prevBtn = document.getElementById("prev-btn");
     const nextBtn = document.getElementById("next-btn");
 
-  // ===============================
-// 作品表示（モーダルを開く）
-// ===============================
-function showProject(index){
-    currentIndex = index;
-    const img = images[currentIndex];
-    if(!img || !lightbox) return;
-
-    lightboxImg.src = img.src;
-    const fileName = img.src.split("/").pop();
-    const project = projects[fileName];
-
-    if(project){
-        projectTitle.textContent = project.title;
-        projectDescription.textContent = project.description;
-        projectTime.textContent = project.time;
-        projectSoftware.textContent = project.software;
-    }
-
-    // JSでstyleをいじらず、CSSのクラス付与だけにする（10ミリ秒遅らせてアニメーション起動）
-    setTimeout(() => {
-        lightbox.classList.add("active");
-    }, 10);
-
-// ===============================
-// モーダルを閉じる処理
-// ===============================
-function closeLightbox() {
-    if(!lightbox) return;
-    
-    // .active を外すだけで、CSSにより自動的にふわっと消えて縮小します
-    lightbox.classList.remove("active");
-}
-
-}  // ===============================
-    // 画像クリックで開く
     // ===============================
-    images.forEach((img, index) => {
-        img.style.cursor = "pointer"; // カーソルをポインターに
-        img.addEventListener("click", () => {
-            showProject(index);
-        });
-    });
+    // 作品表示（モーダルを開く）
+    // ===============================
+    function showProject(index){
+        currentIndex = index;
+        const img = images[currentIndex];
+        if(!img || !lightbox) return;
+
+        lightboxImg.src = img.src;
+        const fileName = img.src.split("/").pop();
+        const project = projects[fileName];
+
+        if(project){
+            projectTitle.textContent = project.title;
+            projectDescription.textContent = project.description;
+            projectTime.textContent = project.time;
+            projectSoftware.textContent = project.software;
+        }
+
+        // クラス付与でアニメーション起動
+        setTimeout(() => {
+            lightbox.classList.add("active");
+        }, 10);
+    }
 
     // ===============================
     // モーダルを閉じる処理
@@ -109,12 +90,21 @@ function closeLightbox() {
     function closeLightbox() {
         if(!lightbox) return;
         lightbox.classList.remove("active");
-
-        setTimeout(() => {
-            lightbox.style.display = "none";
-        }, 300);
     }
 
+    // ===============================
+    // 画像クリックで開く
+    // ===============================
+    images.forEach((img, index) => {
+        img.style.cursor = "pointer";
+        img.addEventListener("click", () => {
+            showProject(index);
+        });
+    });
+
+    // ===============================
+    // 閉じるイベントの登録
+    // ===============================
     if(closeBtn) closeBtn.addEventListener("click", closeLightbox);
 
     if(lightbox) {
@@ -151,7 +141,7 @@ function closeLightbox() {
     }
 
     document.addEventListener("keydown", (e) => {
-        if (lightbox && lightbox.style.display !== "flex") return;
+        if (lightbox && !lightbox.classList.contains("active")) return;
         if (e.key === "ArrowRight" && nextBtn) nextBtn.click();
         if (e.key === "ArrowLeft" && prevBtn) prevBtn.click();
     });
