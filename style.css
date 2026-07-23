@@ -534,12 +534,12 @@ top:-20px;
 }
 
 /* ==============================================
-   ライトボックス（モーダル）アニメーション完全版
+   ライトボックス（モーダル）設定
    ============================================== */
 
-/* 1. 黒背景の枠（初期状態は display: none） */
+/* 1. 全体の黒半透明背景 */
 #lightbox {
-  display: none;
+  display: none; /* JSでflexに切り替えます */
   position: fixed;
   inset: 0;
   background: rgba(0, 0, 0, 0.9);
@@ -547,26 +547,191 @@ top:-20px;
   align-items: center;
   z-index: 9999;
 
-  /* アニメーション用の初期状態（透明） */
+  /* アニメーション用：初期状態は透明 */
   opacity: 0;
   transition: opacity 0.3s ease;
 }
 
-/* activeがついたら不透明に */
+/* activeクラスがついたら不透明（ふわっと表示） */
 #lightbox.active {
   opacity: 1;
 }
 
+/* 2. 中央のコンテンツ枠 */
+.lightbox-content {
+  position: relative;
+  width: 90%;
+  max-width: 1200px;
+  background: #181818;
+  padding: 60px;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  box-shadow: 0 0 50px rgba(0,0,0,.6);
+  overflow: visible !important;
 
-/* 2. 中央のコンテンツカード */
-#lightbox > div {
-  /* 初期状態：少し奥に縮小しておく */
+  /* アニメーション用：初期状態は小さく縮小 */
   transform: scale(0.85);
-  /* スーッと手前に拡大する滑らかなアニメーション */
   transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* activeがついたら手前に拡大（100%の大きさへ） */
-#lightbox.active > div {
+/* activeクラスがついたら等倍に拡大 */
+#lightbox.active .lightbox-content {
   transform: scale(1);
+}
+
+/* 3. 閉じるボタン */
+.close {
+  position: fixed;
+  top: 30px;
+  right: 30px;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(255, 255, 255, .2);
+  border-radius: 50%;
+  color: #fff;
+  font-size: 32px;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 999999;
+  transition: .3s;
+}
+
+.close:hover {
+  background: white;
+  color: #222;
+  transform: scale(1.1);
+}
+
+/* 4. 画像エリア & ナビボタン */
+.image-wrapper {
+  position: relative;
+  width: 65%; 
+  max-width: 800px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+#lightbox-img {
+  width: 100%;
+  max-height: 70vh;
+  object-fit: contain;
+  border-radius: 15px;
+  display: block;
+}
+
+.nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%); 
+  width: 60px;
+  height: 60px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, .15);
+  color: white;
+  font-size: 28px;
+  cursor: pointer;
+  transition: .3s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+}
+
+#prev-btn {
+  left: -30px; 
+}
+
+#next-btn {
+  position: absolute;
+  right: -30px;
+  left: auto;
+  z-index: 99999 !important; 
+}
+
+.nav-btn:hover {
+  background: white;
+  color: black;
+  transform: translateY(-50%) scale(1.15); 
+}
+
+/* 5. 右側テキストエリア */
+.info {
+  width: 35%;
+  min-width: 280px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: left;
+}
+
+.info h2 {
+  font-size: 36px;
+  margin-bottom: 20px;
+  letter-spacing: 2px;
+}
+
+.info p {
+  font-size: 18px;
+  line-height: 1.8;
+  margin-bottom: 15px;
+  color: #ddd;
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+  }
+  .sidebar {
+    width: 100%;
+    padding: 20px;
+    align-items: center;
+  }
+  .sidebar ul {
+    display: flex;
+    gap: 15px;
+  }
+  .sidebar li {
+    margin: 0;
+  }
+  .gallery {
+    width: 100%;
+    padding: 20px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+  .about-section {
+    padding: 40px 25px;
+  }
+  .about-section h2 {
+    font-size: 28px;
+  }
+  .about-section p {
+    font-size: 16px;
+  }
+  .lightbox-content {
+    flex-direction: column;
+    padding: 30px 20px;
+    width: 95%;
+  }
+  .image-wrapper {
+    width: 100%;
+  }
+  .info {
+    width: 100%;
+    text-align: center;
+    margin-top: 20px;
+  }
+  #prev-btn { left: 10px; }
+  #next-btn { right: 10px; }
 }
