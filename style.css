@@ -742,21 +742,49 @@ top:-20px;
     #next-btn { right: 10px; }
 }
 
-/* 作品カードに光が走る演出 */
-.item::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -75%;
-  width: 50%;
-  height: 100%;
-  background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.15) 100%);
-  transform: skewX(-25deg);
-  transition: all 0.75s ease;
-  pointer-events: none;
-  z-index: 2;
+/* ==========================================
+   トップへ戻るボタン
+   ========================================== */
+.back-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 990;
+    
+    /* 初期状態は非表示（透明） */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+    
+    /* 出現・ホバー時の動きを滑らかに */
+    transition: all 0.3s ease;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(5px);
 }
 
-.item:hover::before {
-  left: 125%; /* ホバー時に光が通過 */
+/* 画面をスクロールした時に付与するクラス */
+.back-to-top.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+/* ホバー時の演出 */
+.back-to-top:hover {
+    background: #fff;
+    color: #111;
+    transform: translateY(-500px); /* 少し上に浮き上がる */
+    box-shadow: 0 5px 15px rgba(255, 255, 255, 0.3);
 }

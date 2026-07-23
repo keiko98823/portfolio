@@ -204,3 +204,27 @@ const observer = new IntersectionObserver((entries) => {
 items.forEach(item => {
     observer.observe(item);
 });
+
+// ===============================
+// トップへ戻るボタンの制御
+// ===============================
+const backToTopBtn = document.getElementById("back-to-top");
+
+if (backToTopBtn) {
+    // スクロール量に応じてボタンの表示/非表示を切り替え
+    window.addEventListener("scroll", () => {
+        if (window.scrollY > 300) { // 300px以上スクロールしたら表示
+            backToTopBtn.classList.add("show");
+        } else {
+            backToTopBtn.classList.remove("show");
+        }
+    });
+
+    // ボタンクリックで最上部へスムーズにスクロール
+    backToTopBtn.addEventListener("click", () => {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+    });
+}
