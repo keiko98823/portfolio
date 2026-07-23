@@ -789,3 +789,22 @@ top:-20px;
     transform: translateY(-5px); /* ←ここを -5px に変更！ */
     box-shadow: 0 5px 15px rgba(255, 255, 255, 0.3);
 }
+
+/* 作品カードに光が走る演出 */
+.item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -75%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.15) 100%);
+  transform: skewX(-25deg);
+  transition: all 0.75s ease;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.item:hover::before {
+  left: 125%; /* ホバー時に光が通過 */
+}
