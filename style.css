@@ -785,6 +785,6 @@ top:-20px;
 .back-to-top:hover {
     background: #fff;
     color: #111;
-    transform: translateY(-500px); /* 少し上に浮き上がる */
+    transform: translateY(-5px); /* 少し上に浮き上がる */
     box-shadow: 0 5px 15px rgba(255, 255, 255, 0.3);
 }
