@@ -782,9 +782,10 @@ top:-20px;
 }
 
 /* ホバー時の演出 */
+/* ホバー時の演出（修正後） */
 .back-to-top:hover {
     background: #fff;
     color: #111;
-    transform: translateY(-5px); /* 少し上に浮き上がる */
+    transform: translateY(-5px); /* ←ここを -5px に変更！ */
     box-shadow: 0 5px 15px rgba(255, 255, 255, 0.3);
 }
