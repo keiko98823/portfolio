@@ -67,9 +67,6 @@ window.addEventListener("DOMContentLoaded", () => {
         const img = images[currentIndex];
         if(!img || !lightbox) return;
 
-        // 1. まず確実にモーダルを表示（この時点では opacity: 0）
-        lightbox.style.display = "flex";
-
         lightboxImg.src = img.src;
         const fileName = img.src.split("/").pop();
         const project = projects[fileName];
@@ -81,12 +78,13 @@ window.addEventListener("DOMContentLoaded", () => {
             projectSoftware.textContent = project.software;
         }
 
-        // 2. ブラウザが画面を描画した次の瞬間に .active を付与してアニメーション起動！
-        requestAnimationFrame(() => {
-            requestAnimationFrame(() => {
-                lightbox.classList.add("active");
-            });
-        });
+        // 1. まず表示状態（display: flex）にする
+        lightbox.style.display = "flex";
+
+        // 2. ほんの少しだけ遅らせて .active を付与し、フェード＆拡大アニメーションを起動！
+        setTimeout(() => {
+            lightbox.classList.add("active");
+        }, 20);
     }
 
     // ===============================
