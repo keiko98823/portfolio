@@ -808,3 +808,63 @@ top:-20px;
 .item:hover::before {
   left: 125%; /* ホバー時に光が通過 */
 }
+
+
+.hero{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    padding:40px;
+}
+
+.hero-content h1{
+    font-size:4.5rem;
+    letter-spacing:8px;
+    margin-bottom:20px;
+}
+
+.hero-content h2{
+    font-size:2rem;
+    line-height:1.6;
+    font-weight:300;
+}
+
+.hero-content h2 span{
+    color:#66d9ff;
+}
+
+.hero-subtitle{
+    color:#66d9ff;
+    letter-spacing:4px;
+    margin-bottom:15px;
+}
+
+.hero-text{
+    color:#bdbdbd;
+    margin-top:25px;
+    line-height:1.8;
+}
+
+.skill-tags{
+    margin-top:40px;
+    display:flex;
+    justify-content:center;
+    gap:15px;
+    flex-wrap:wrap;
+}
+
+.skill-tags span{
+    border:1px solid #66d9ff;
+    padding:10px 18px;
+    border-radius:30px;
+    color:#66d9ff;
+}
+
+.scroll-btn{
+    display:inline-block;
+    margin-top:50px;
+    color:white;
+    text-decoration:none;
+}
