@@ -773,13 +773,19 @@ top:-20px;
 
     }
 
-   #prev-btn{
-    left:10px;
+  #prev-btn{
+    position:absolute;
+    top:32%;
+    left:20px;
+    transform:translateY(-50%);
 }
 
 #next-btn{
-    right:10px;
+    position:absolute;
+    top:32%;
+    right:20px;
     left:auto;
+    transform:translateY(-50%);
 }
 
 }
