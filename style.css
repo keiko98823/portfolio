@@ -524,9 +524,10 @@ body{
     }
 }
 
-model-viewer {
+/* 3Dモデル表示タグのサイズ指定 */
+#lightbox-3d {
     width: 100%;
-    height: 400px;
-    background-color: #1a1a1a;
+    height: 60vh;
+    background-color: #111111;
     border-radius: 15px;
 }
