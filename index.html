@@ -6,7 +6,7 @@
     <title>Keiko Portfolio</title>
     <link rel="stylesheet" href="style.css">
 
-<!-- 追加：model-viewerの読み込み -->
+    <!-- 3Dモデル表示用ライブラリ (<model-viewer>) -->
     <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
 </head>
 
@@ -94,15 +94,15 @@
             </div>
         </div>
 
-        <model-viewer 
-    src="/duckcop.glb" 
-    alt="3D Ahiru Model" 
-    camera-controls 
-    auto-rotate 
-    shadow-intensity="1">
-</model-viewer>
+        <!-- 3Dモデルがある場合は data-model 属性で .glb ファイルのパスを指定します -->
+        <div class="item" data-model="models/duckcop.glb">
+            <img src="images/ahiru3.png" alt="Ahiru">
+            <div class="overlay">
+                <h3>Ahiru</h3>
+            </div>
+        </div>
 
-       <div class="item">
+        <div class="item">
             <img src="images/NeonLogo.png" alt="Neon Logo">
             <div class="overlay">
                 <h3>Neon Logo</h3>
@@ -155,8 +155,7 @@
 
 </section>
 
-<!-- Lightbox -->
-
+<!-- Lightbox (モーダル) -->
 <div id="lightbox" class="lightbox">
 
     <div class="lightbox-content">
@@ -167,7 +166,18 @@
 
             <button id="prev-btn" class="nav-btn">&#10094;</button>
 
+            <!-- 通常画像表示用 -->
             <img id="lightbox-img" src="" alt="">
+
+            <!-- 3Dモデル表示用 -->
+            <model-viewer 
+                id="lightbox-3d" 
+                src="" 
+                camera-controls 
+                auto-rotate 
+                shadow-intensity="1" 
+                style="display: none;">
+            </model-viewer>
 
         </div>
 
@@ -189,7 +199,6 @@
 
         </div>
 
-        <!-- ★ここへ移動 -->
         <button id="next-btn" class="nav-btn">&#10095;</button>
 
     </div>
