@@ -46,9 +46,10 @@ let currentIndex = 0;
 // ページの読み込みが完了してから処理を実行
 window.addEventListener("DOMContentLoaded", () => {
 
-    const images = document.querySelectorAll(".item img");
+    const items = document.querySelectorAll(".item");
     const lightbox = document.getElementById("lightbox");
     const lightboxImg = document.getElementById("lightbox-img");
+    const lightbox3D = document.getElementById("lightbox-3d");
     const closeBtn = document.querySelector(".close");
 
     const projectTitle = document.getElementById("project-title");
@@ -64,10 +65,28 @@ window.addEventListener("DOMContentLoaded", () => {
     // ===============================
     function showProject(index){
         currentIndex = index;
-        const img = images[currentIndex];
-        if(!img || !lightbox) return;
+        const targetItem = items[currentIndex];
+        if(!targetItem || !lightbox) return;
 
-        lightboxImg.src = img.src;
+        const img = targetItem.querySelector("img");
+        if(!img) return;
+
+        // 3Dモデルデータの確認
+        const modelPath = targetItem.getAttribute("data-model");
+
+        if (modelPath && lightbox3D) {
+            // 3Dモデルが存在する場合
+            lightboxImg.style.display = "none";
+            lightbox3D.style.display = "block";
+            lightbox3D.setAttribute("src", modelPath);
+        } else {
+            // 通常の画像作品の場合
+            if (lightbox3D) lightbox3D.style.display = "none";
+            lightboxImg.style.display = "block";
+            lightboxImg.src = img.src;
+        }
+
+        // テキストデータの反映
         const fileName = img.src.split("/").pop();
         const project = projects[fileName];
 
@@ -76,43 +95,21 @@ window.addEventListener("DOMContentLoaded", () => {
             projectDescription.textContent = project.description;
             projectTime.textContent = project.time;
             projectSoftware.textContent = project.software;
+        } else {
+            projectTitle.textContent = "";
+            projectDescription.textContent = "";
+            projectTime.textContent = "";
+            projectSoftware.textContent = "";
         }
 
-        // 1. まず表示状態（display: flex）にする
+        // 1. まず表示状態にする
         lightbox.style.display = "flex";
 
-        // 2. ほんの少しだけ遅らせて .active を付与し、フェード＆拡大アニメーションを起動！
+        // 2. 少し遅らせて .active を付与しアニメーションを起動
         setTimeout(() => {
             lightbox.classList.add("active");
         }, 20);
     }
-
-    //３D表示
-const lightboxImg = document.getElementById('lightbox-img');
-const lightbox3D = document.getElementById('lightbox-3d');
-
-// 作品カードクリック時の表示切り替え
-document.querySelectorAll('.item').forEach(item => {
-    item.addEventListener('click', () => {
-        const modelPath = item.getAttribute('data-model');
-        const img = item.querySelector('img');
-
-        if (modelPath) {
-            // 3Dモデルがある作品（Ahiruなど）
-            lightboxImg.style.display = 'none';
-            lightbox3D.style.display = 'block';
-            lightbox3D.setAttribute('src', modelPath);
-        } else {
-            // 通常の画像作品
-            lightbox3D.style.display = 'none';
-            lightboxImg.style.display = 'block';
-            lightboxImg.src = img.src;
-        }
-
-        document.getElementById('lightbox').classList.add('active');
-    });
-});
-
 
     // ===============================
     // モーダルを閉じる処理
@@ -120,21 +117,21 @@ document.querySelectorAll('.item').forEach(item => {
     function closeLightbox() {
         if(!lightbox) return;
         
-        // 1. .active を外してふわっと消すアニメーションを開始
         lightbox.classList.remove("active");
 
-        // 2. 0.3秒のアニメーションが終わった後に確実に非表示(none)にする
         setTimeout(() => {
             lightbox.style.display = "none";
+            // 閉じた時に3D回転をリセット
+            if (lightbox3D) lightbox3D.removeAttribute("src");
         }, 300);
     }
 
     // ===============================
-    // 画像クリックで開く
+    // 作品カード（または画像）クリックで開く
     // ===============================
-    images.forEach((img, index) => {
-        img.style.cursor = "pointer";
-        img.addEventListener("click", () => {
+    items.forEach((item, index) => {
+        item.style.cursor = "pointer";
+        item.addEventListener("click", () => {
             showProject(index);
         });
     });
@@ -162,17 +159,19 @@ document.querySelectorAll('.item').forEach(item => {
     // 前へ・次へボタン
     // ===============================
     if(prevBtn) {
-        prevBtn.addEventListener("click", () => {
+        prevBtn.addEventListener("click", (e) => {
+            e.stopPropagation();
             currentIndex--;
-            if (currentIndex < 0) currentIndex = images.length - 1;
+            if (currentIndex < 0) currentIndex = items.length - 1;
             showProject(currentIndex);
         });
     }
 
     if(nextBtn) {
-        nextBtn.addEventListener("click", () => {
+        nextBtn.addEventListener("click", (e) => {
+            e.stopPropagation();
             currentIndex++;
-            if (currentIndex >= images.length) currentIndex = 0;
+            if (currentIndex >= items.length) currentIndex = 0;
             showProject(currentIndex);
         });
     }
@@ -186,8 +185,7 @@ document.querySelectorAll('.item').forEach(item => {
     // ===============================
     // 3Dチルトエフェクト
     // ===============================
-    const tiltItems = document.querySelectorAll(".item");
-    tiltItems.forEach(item => {
+    items.forEach(item => {
         const img = item.querySelector("img");
         if (!img) return;
 
@@ -238,16 +236,14 @@ items.forEach(item => {
 const backToTopBtn = document.getElementById("back-to-top");
 
 if (backToTopBtn) {
-    // スクロール量に応じてボタンの表示/非表示を切り替え
     window.addEventListener("scroll", () => {
-        if (window.scrollY > 300) { // 300px以上スクロールしたら表示
+        if (window.scrollY > 300) {
             backToTopBtn.classList.add("show");
         } else {
             backToTopBtn.classList.remove("show");
         }
     });
 
-    // ボタンクリックで最上部へスムーズにスクロール
     backToTopBtn.addEventListener("click", () => {
         window.scrollTo({
             top: 0,
