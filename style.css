@@ -760,10 +760,8 @@ top:-20px;
     }
 
     .image-wrapper{
-
-        width:100%;
-
-    }
+    position:relative;
+}
 
     .info{
 
