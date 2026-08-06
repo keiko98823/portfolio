@@ -74,17 +74,13 @@ body{
 
 .item{
     position: relative;
-
-    opacity: 1; /* ← 一時的に 0 から 1 に変更してみる */
-    transform: translateY(0); /* ← 一時的に 60px から 0 に変更してみる */
-
+    opacity: 1;
+    transform: translateY(0);
     transition:
         opacity .8s ease,
         transform .8s ease,
         box-shadow .4s ease;
-
     overflow:hidden;
-
     perspective:1000px;
     transform-style:preserve-3d;
     border-radius:15px;
@@ -99,27 +95,12 @@ body{
     width: 100%;
     aspect-ratio: 1/1;
     object-fit: cover;
-    
-    /* ★ transition: .4s; は削除するかコメントアウトします */
-    /* transition: .4s; */
-
-    /* ★ 3Dチルトの立体感を綺麗に表現するための設定を追加 */
     transform-style: preserve-3d;
-    /*追加*/
     backface-visibility: hidden;
-       display:block;
-    width:100%;
+    display:block;
     transition:transform .15s ease;
     will-change:transform;
 }
-
-
-
-/* 元の scale(1.05) を消して、JS側で拡大と傾きを同時に制御できるようにします */
-/*.item:hover img {
-    /* コメントアウト、または削除 */
-    /* transform: scale(1.05); */ 
-
 
 .overlay{
     position:absolute;
@@ -136,411 +117,80 @@ body{
 .item:hover .overlay{
     opacity:1;
 }
+
 .about-section{
-padding:80px;
-background:#1a1a1a;
-color:white;
-border-top:1px solid #333;
+    padding:80px;
+    background:#1a1a1a;
+    color:white;
+    border-top:1px solid #333;
 }
 
 .about-section h2{
-font-size:36px;
-margin-bottom:30px;
-letter-spacing:3px;
+    font-size:36px;
+    margin-bottom:30px;
+    letter-spacing:3px;
 }
 
 .about-section h3{
-margin-top:40px;
-margin-bottom:15px;
+    margin-top:40px;
+    margin-bottom:15px;
 }
 
 .about-section p{
-max-width:800px;
-line-height:1.8;
-margin-bottom:15px;
+    max-width:800px;
+    line-height:1.8;
+    margin-bottom:15px;
 }
 
 .about-section ul{
-list-style:none;
-padding:0;
+    list-style:none;
+    padding:0;
 }
 
 .about-section li{
-margin-bottom:10px;
+    margin-bottom:10px;
 }
 
 #projects{
-position:relative;
-top:-20px;
-}
-
-/* ==========================================
-   ライトボックス全体のスタイル（ここから差し替え）
-   ========================================== */
-.lightbox {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.9);
-    justify-content: center;
-    align-items: center;
-    z-index: 9999;
-}
-
-/* 閉じるボタン */
-.close {
-    position: fixed;
-    top: 30px;
-    right: 30px;
-    width: 50px;
-    height: 50px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: rgba(255, 255, 255, .2);
-    border-radius: 50%;
-    color: #fff;
-    font-size: 32px;
-    font-weight: bold;
-    cursor: pointer;
-    z-index: 999999;
-    transition: .3s;
-}
-
-.close:hover {
-    background: white;
-    color: #222;
-    transform: scale(1.1);
-}
-
-/* ポップアップの内枠（横並びのレイアウトの基盤） */
-/* ==================================================
-   ここから下のコードで、現在のCSSの138行目以降を丸ごと置き換えてください
-   ================================================== */
-
-.lightbox-content {
-    position: relative;
-    width: 90%;
-    max-width: 1200px;
-    background: #181818;
-    padding: 60px;
-    border-radius: 20px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    gap: 40px;
-    box-shadow: 0 0 50px rgba(0,0,0,.6);
-    
-    /* 重要：はみ出たボタンを絶対に隠さない設定 */
-    overflow: visible !important; 
-}
-
-/* 画像エリアの枠（元の一杯に広がる状態に戻します） */
-.image-wrapper {
-    position: relative;
-    width: 65%; 
-    max-width: 800px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-shrink: 0;
-}
-
-/* 拡大画像そのもの */
-#lightbox-img {
-    width: 100%;
-    max-height: 70vh;
-    object-fit: contain;
-    border-radius: 15px;
-    display: block;
-}
-
-/* 左右ボタンの共通スタイル */
-.nav-btn {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%); 
-    width: 60px;
-    height: 60px;
-    border: none;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, .15);
-    color: white;
-    font-size: 28px;
-    cursor: pointer;
-    transition: .3s;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 10;
-}
-
-/* 左ボタン：画像の左フチ */
-#prev-btn {
-    left: -30px; 
-}
-
-/* 右ボタン：文章も飛び越えて黒いエリア全体の右端へ強制配置 */
-/* 右ボタン：引っ越しさせたので、黒枠の右端から20pxの位置に固定されます */
-#next-btn {
-    position: absolute;
-    /* 黒枠の右端から内側に30pxの位置に固定 */
-    right: auto; 
-    left: auto; /*変更の必要あり*/
-    
-    /* 他の要素に隠されないように最前面へ */
-    z-index: 99999 !important; 
-}
-
-.nav-btn:hover {
-    background: white;
-    color: black;
-    transform: translateY(-50%) scale(1.15); 
-}
-
-/* 右側のテキストエリア */
-.info {
-    width: 35%;
-    min-width: 280px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    text-align: left;
-}
-
-.info h2 {
-    font-size: 36px;
-    margin-bottom: 20px;
-    letter-spacing: 2px;
-}
-
-.info p {
-    font-size: 18px;
-    line-height: 1.8;
-    margin-bottom: 15px;
-    color: #ddd;
-}
-
-@media (max-width: 768px) {
-    /* 縦並びに変更 */
-    .container {
-        flex-direction: column;
-    }
-    
-    /* サイドバーを上部メニューに */
-    .sidebar{
-
-    width:100%;
-    padding:20px;
-
-    flex-direction:column;
-
-    align-items:center;
-
-}
-    
-    .sidebar ul {
-        display: flex;
-        gap: 15px;
-    }
-    
-    .sidebar li {
-        margin: 0;
-    }
-
-    /* ライトボックスもスマホ用に縦並びへ */
-    .lightbox-content{
-    flex-direction:column;
-    width:95%;
-    padding:20px;
-    gap:20px;
-}
-    
-    .image-wrapper {
-        width: 100%;
-    }
-    
-    .info {
-        width: 100%;
-        text-align: center;
-        margin-top: 20px;
-    }
-    
-    /* スマホ時はボタンを画面下部や画像の上に調整 */
- /* 右ボタン：文章も飛び越えて黒いエリア全体の右端へ強制配置 */
-#next-btn{
-    position:absolute;
-    right:30px;
-    left:auto;
-    z-index:99999 !important;
-}
-
-}   /* ← これを追加して最初の @media を閉じる */
-
-
-/* ===========================
-   Responsive
-=========================== */
-
-@media (max-width:768px){
-
-    /* 全体を縦並び */
-    .container{
-        flex-direction:column;
-    }
-
-    /* サイドバー */
-    .sidebar{
-        width:100%;
-        padding:20px;
-        justify-content:center;
-        align-items:center;
-    }
-
-    .sidebar ul{
-        display:flex;
-        justify-content:center;
-        gap:20px;
-        flex-wrap:wrap;
-    }
-
-    .sidebar li{
-        margin:0;
-    }
-
-    .logo{
-        margin-bottom:20px;
-    }
-
-    /* ギャラリー */
-
-    .gallery{
-
-        width:100%;
-        padding:20px;
-        grid-template-columns:repeat(2,1fr);
-
-        gap:20px;
-    }
-
-    /* ABOUTなど */
-
-    .about-section{
-
-        padding:40px 25px;
-
-    }
-
-    .about-section h2{
-
-        font-size:28px;
-
-    }
-
-    .about-section p{
-
-        font-size:16px;
-
-    }
-
-}
-
-.image-wrapper{
     position:relative;
+    top:-20px;
 }
 
-#prev-btn{
-    left:10px;
-}
-
-#next-btn{
-    right:10px;
-}
-
-/* カードに光沢が走るエフェクトの例 */
-.project-card {
-  position: relative;
-  overflow: hidden;
-}
-
-.project-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -75%;
-  width: 50%;
-  height: 100%;
-  background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.15) 100%);
-  transform: skewX(-25deg);
-  transition: all 0.75s ease;
-  pointer-events: none;
-}
-
-.project-card:hover::before {
-  left: 125%; /* ホバー時に光が左から右へ通過 */
-}
-
-
-/* ==============================================
-   1. モーダル全体（背景の黒半透明カバー）
-   ============================================== */
+/* モーダル・ライトボックス設定 */
 .modal {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.7); /* 黒半透明 */
+  background-color: rgba(0, 0, 0, 0.7);
   display: flex;
   justify-content: center;
   align-items: center;
-
-  /* 初期状態：隠しておく */
   opacity: 0;
   visibility: hidden;
-  
-  /* ふわっと変化させる設定（0.3秒） */
   transition: opacity 0.3s ease, visibility 0.3s ease;
   z-index: 1000;
 }
 
-/* 表示時のクラス */
 .modal.active {
   opacity: 1;
   visibility: visible;
 }
 
-
-/* ==============================================
-   2. 中央のコンテンツカード
-   ============================================== */
 .modal-content {
-  background-color: #1a1a1a; /* カードの背景色 */
+  background-color: #1a1a1a;
   border-radius: 12px;
   padding: 24px;
   max-width: 600px;
   width: 90%;
-  
-  /* 初期状態：少し小さく（奥に）しておく */
   transform: scale(0.92);
-  
-  /* カードが拡大する動きの設定 */
   transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* モーダル表示時のカードの状態（手前に拡大） */
 .modal.active .modal-content {
   transform: scale(1);
 }
-
-/* ==========================================
-   ライトボックス（モーダル）設定
-   ========================================== */
-
-/* ==========================================
-   Lightbox
-========================================== */
 
 #lightbox{
     position:fixed;
@@ -549,10 +199,8 @@ top:-20px;
     justify-content:center;
     align-items:center;
     background:rgba(0,0,0,.9);
-
     opacity:0;
     pointer-events:none;
-
     transition:.3s;
     z-index:9999;
 }
@@ -562,287 +210,124 @@ top:-20px;
     pointer-events:auto;
 }
 
-/* ------------------------------ */
-
 .lightbox-content{
-
     position:relative;
-
     width:90%;
     max-width:1300px;
-
     background:#181818;
-
     border-radius:20px;
-
     padding:50px;
-
     display:flex;
-
     align-items:center;
-
     gap:50px;
-
     box-shadow:0 0 50px rgba(0,0,0,.6);
-
     transform:scale(.9);
-
     transition:.3s;
+    overflow: visible !important;
 }
 
 #lightbox.active .lightbox-content{
     transform:scale(1);
 }
 
-/* ------------------------------ */
-
 .image-wrapper{
-
     position:relative;
-
     width:65%;
-
     display:flex;
-
     justify-content:center;
-
     align-items:center;
-
     flex-shrink:0;
-
 }
 
 #lightbox-img{
-
     width:100%;
-
     max-height:70vh;
-
     object-fit:contain;
-
     border-radius:15px;
-
+    display:block;
 }
 
-/* ------------------------------ */
-
 .info{
-
     width:35%;
-
     min-width:280px;
-
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    text-align:left;
 }
 
 .info h2{
-
     font-size:48px;
-
     margin-bottom:25px;
-
+    letter-spacing:2px;
 }
 
 .info p{
-
     font-size:20px;
-
     line-height:1.8;
-
+    margin-bottom:15px;
     color:#ddd;
-
 }
 
-/* ------------------------------ */
-
 .nav-btn{
-
     position:absolute;
-
     top:50%;
-
     transform:translateY(-50%);
-
     width:60px;
-
     height:60px;
-
     border:none;
-
     border-radius:50%;
-
     background:rgba(255,255,255,.15);
-
     color:white;
-
     font-size:28px;
-
     cursor:pointer;
-
     transition:.3s;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    z-index:10;
 }
 
 .nav-btn:hover{
-
     background:white;
-
     color:#111;
-
-    transform:translateY(-50%) scale(1.1);
-
+    transform:translateY(-50%) scale(1.15);
 }
-
-/* 左ボタン */
 
 #prev-btn{
-
     left:-30px;
-
 }
-
-/* 右ボタン */
 
 #next-btn{
-
     right:30px;
-
+    z-index:99999 !important;
 }
 
-/* ------------------------------ */
-
 .close{
-
     position:absolute;
-
     top:25px;
-
     right:25px;
-
     width:50px;
-
     height:50px;
-
     border-radius:50%;
-
     display:flex;
-
     justify-content:center;
-
     align-items:center;
-
     background:rgba(255,255,255,.15);
-
     font-size:30px;
-
+    color:#fff;
     cursor:pointer;
-
     transition:.3s;
-
+    z-index:999999;
 }
 
 .close:hover{
-
     background:white;
-
     color:black;
-
+    transform:scale(1.1);
 }
 
-/* ------------------------------ */
-
-@media(max-width:768px){
-
-    .lightbox-content{
-
-        flex-direction:column;
-
-        padding:30px 20px;
-
-    }
-
-    .image-wrapper{
-    position:relative;
-}
-
-    .info{
-
-        width:100%;
-
-        text-align:center;
-
-    }
-
-  .image-wrapper{
-    position: relative;
-}
-
-#prev-btn,
-#next-btn{
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 10;
-
-#prev-btn{
-    left: 12px;
-}
-
-#next-btn{
-    right: 12px;
-}
-
-}
-
-/* レスポンシブ対応 */
-@media (max-width: 768px) {
-    .container {
-        flex-direction: column;
-    }
-    .sidebar {
-        width: 100%;
-        padding: 20px;
-        align-items: center;
-    }
-    .sidebar ul {
-        display: flex;
-        gap: 15px;
-    }
-    .sidebar li {
-        margin: 0;
-    }
-    .gallery {
-        width: 100%;
-        padding: 20px;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 20px;
-    }
-    .about-section {
-        padding: 40px 25px;
-    }
-    .about-section h2 {
-        font-size: 28px;
-    }
-    .about-section p {
-        font-size: 16px;
-    }
-    .lightbox-content {
-        flex-direction: column;
-        padding: 30px 20px;
-        width: 95%;
-    }
-    .image-wrapper {
-        width: 100%;
-    }
-    .info {
-        width: 100%;
-        text-align: center;
-        margin-top: 20px;
-    }
-    
-}
-
-/* ==========================================
-   トップへ戻るボタン
-   ========================================== */
+/* トップへ戻るボタン */
 .back-to-top {
     position: fixed;
     bottom: 30px;
@@ -857,38 +342,30 @@ top:-20px;
     font-weight: bold;
     cursor: pointer;
     z-index: 990;
-    
-    /* 初期状態は非表示（透明） */
     opacity: 0;
     visibility: hidden;
     transform: translateY(20px);
-    
-    /* 出現・ホバー時の動きを滑らかに */
     transition: all 0.3s ease;
-    
     display: flex;
     justify-content: center;
     align-items: center;
     backdrop-filter: blur(5px);
 }
 
-/* 画面をスクロールした時に付与するクラス */
 .back-to-top.show {
     opacity: 1;
     visibility: visible;
     transform: translateY(0);
 }
 
-/* ホバー時の演出 */
-/* ホバー時の演出（修正後） */
 .back-to-top:hover {
     background: #fff;
     color: #111;
-    transform: translateY(-5px); /* ←ここを -5px に変更！ */
+    transform: translateY(-5px);
     box-shadow: 0 5px 15px rgba(255, 255, 255, 0.3);
 }
 
-/* 作品カードに光が走る演出 */
+/* 作品カード光沢演出 */
 .item::before {
   content: '';
   position: absolute;
@@ -904,10 +381,10 @@ top:-20px;
 }
 
 .item:hover::before {
-  left: 125%; /* ホバー時に光が通過 */
+  left: 125%;
 }
 
-
+/* HEROエリア */
 .hero{
     min-height:100vh;
     display:flex;
@@ -966,4 +443,83 @@ top:-20px;
     color:white;
     text-decoration:none;
 }
+
+/* レスポンシブ対応 (メディアクエリ) */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        padding: 20px;
+        align-items: center;
+    }
+
+    .sidebar ul {
+        display: flex;
+        gap: 15px;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .sidebar li {
+        margin: 0;
+    }
+
+    .logo {
+        margin-bottom: 20px;
+    }
+
+    .gallery {
+        width: 100%;
+        padding: 20px;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+
+    .about-section {
+        padding: 40px 25px;
+    }
+
+    .about-section h2 {
+        font-size: 28px;
+    }
+
+    .about-section p {
+        font-size: 16px;
+    }
+
+    .lightbox-content {
+        flex-direction: column;
+        padding: 30px 20px;
+        width: 95%;
+    }
+
+    .image-wrapper {
+        width: 100%;
+        position: relative;
+    }
+
+    .info {
+        width: 100%;
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    #prev-btn,
+    #next-btn {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 10;
+    }
+
+    #prev-btn {
+        left: 12px;
+    }
+
+    #next-btn {
+        right: 12px;
+    }
 }
