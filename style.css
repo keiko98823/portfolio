@@ -350,11 +350,12 @@ top:-20px;
     }
 
     /* ライトボックスもスマホ用に縦並びへ */
-    .lightbox-content {
-        flex-direction: column;
-        padding: 30px 20px;
-        width: 95%;
-    }
+    .lightbox-content{
+    flex-direction:column;
+    width:95%;
+    padding:20px;
+    gap:20px;
+}
     
     .image-wrapper {
         width: 100%;
@@ -772,17 +773,14 @@ top:-20px;
 
     }
 
-    #prev-btn{
+   #prev-btn{
+    left:10px;
+}
 
-        left:10px;
-
-    }
-
-    #next-btn{
-
-        right:10px;
-
-    }
+#next-btn{
+    right:10px;
+    left:auto;
+}
 
 }
 
