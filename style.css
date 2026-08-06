@@ -771,19 +771,22 @@ top:-20px;
 
     }
 
-  #prev-btn{
-    position:absolute;
-    top:32%;
-    left:20px;
-    transform:translateY(-50%);
+  .image-wrapper{
+    position: relative;
+}
+
+#prev-btn,
+#next-btn{
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+#prev-btn{
+    left: 12px;
 }
 
 #next-btn{
-    position:absolute;
-    top:32%;
-    right:20px;
-    left:auto;
-    transform:translateY(-50%);
+    right: 12px;
 }
 
 }
