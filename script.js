@@ -87,6 +87,33 @@ window.addEventListener("DOMContentLoaded", () => {
         }, 20);
     }
 
+    //３D表示
+const lightboxImg = document.getElementById('lightbox-img');
+const lightbox3D = document.getElementById('lightbox-3d');
+
+// 作品カードクリック時の表示切り替え
+document.querySelectorAll('.item').forEach(item => {
+    item.addEventListener('click', () => {
+        const modelPath = item.getAttribute('data-model');
+        const img = item.querySelector('img');
+
+        if (modelPath) {
+            // 3Dモデルがある作品（Ahiruなど）
+            lightboxImg.style.display = 'none';
+            lightbox3D.style.display = 'block';
+            lightbox3D.setAttribute('src', modelPath);
+        } else {
+            // 通常の画像作品
+            lightbox3D.style.display = 'none';
+            lightboxImg.style.display = 'block';
+            lightboxImg.src = img.src;
+        }
+
+        document.getElementById('lightbox').classList.add('active');
+    });
+});
+
+
     // ===============================
     // モーダルを閉じる処理
     // ===============================
