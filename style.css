@@ -548,3 +548,31 @@ body{
     background-color: #1a1a1a;
     border-radius: 12px;
 }
+
+/* ==========================================
+   3Dモデル表示枠の強制サイズ指定
+   ========================================== */
+.lightbox-content .image-wrapper {
+    width: 60% !important;
+    min-width: 280px;
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+}
+
+#lightbox-3d {
+    width: 100% !important;
+    height: 450px !important; /* ← 高さを強制的に確保 */
+    background-color: #111111;
+    border-radius: 12px;
+}
+
+/* モバイル表示時のサイズ調整 */
+@media (max-width: 768px) {
+    .lightbox-content .image-wrapper {
+        width: 100% !important;
+    }
+    #lightbox-3d {
+        height: 300px !important;
+    }
+}
