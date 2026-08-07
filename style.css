@@ -576,3 +576,37 @@ body{
         height: 300px !important;
     }
 }
+
+/* モーダル内のレイアウト調整 */
+.lightbox-content {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    max-width: 900px;
+    width: 90%;
+}
+
+.lightbox-content .image-wrapper {
+    flex: 1 1 50%;
+    min-width: 300px;
+    height: 400px; /* 親要素の高さを指定 */
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* 3D表示タグのサイズを強制指定 */
+#lightbox-3d {
+    width: 100% !important;
+    height: 100% !important;
+    min-height: 350px !important;
+    background-color: #1a1a1a;
+    border-radius: 12px;
+}
+
+#lightbox-img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}

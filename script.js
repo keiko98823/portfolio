@@ -71,22 +71,37 @@ window.addEventListener("DOMContentLoaded", () => {
         const img = targetItem.querySelector("img");
         if(!img) return;
 
-        // 3Dモデルデータの確認
+        // 3Dモデルパスの取得
         const modelPath = targetItem.getAttribute("data-model");
 
-        if (modelPath && lightbox3D) {
-            // 3Dモデルが存在する場合
-            lightboxImg.style.display = "none";
-            lightbox3D.style.display = "block";
-            lightbox3D.setAttribute("src", modelPath);
-        } else {
-            // 通常の画像作品の場合
-            if (lightbox3D) lightbox3D.style.display = "none";
-            lightboxImg.style.display = "block";
-            lightboxImg.src = img.src;
-        }
+        // 1. まずモーダルを表示状態(flex)にして画面上の枠組みを確保
+        lightbox.style.display = "flex";
 
-        // 大文字小文字のズレを考慮してファイル名検索
+        // 2. 表示状態になった直後に3Dモデル/画像の切り替えを実施（サイズ潰れ防止）
+        setTimeout(() => {
+            lightbox.classList.add("active");
+
+            if (modelPath && lightbox3D) {
+                // 3Dモデル表示
+                if (lightboxImg) lightboxImg.style.display = "none";
+                lightbox3D.style.display = "block";
+                
+                // srcを再設定して描画をキックする
+                lightbox3D.setAttribute("src", modelPath);
+            } else {
+                // 通常画像表示
+                if (lightbox3D) {
+                    lightbox3D.style.display = "none";
+                    lightbox3D.removeAttribute("src");
+                }
+                if (lightboxImg) {
+                    lightboxImg.style.display = "block";
+                    lightboxImg.src = img.src;
+                }
+            }
+        }, 30);
+
+        // ファイル名を小文字に揃えてテキストデータを検索
         const fileName = img.src.split("/").pop().toLowerCase();
         const projectKey = Object.keys(projects).find(key => key.toLowerCase() === fileName);
         const project = projects[projectKey];
@@ -102,14 +117,6 @@ window.addEventListener("DOMContentLoaded", () => {
             projectTime.textContent = "";
             projectSoftware.textContent = "";
         }
-
-        // 1. まず表示状態にする
-        lightbox.style.display = "flex";
-
-        // 2. 少し遅らせて .active を付与しアニメーションを起動
-        setTimeout(() => {
-            lightbox.classList.add("active");
-        }, 20);
     }
 
     // ===============================
@@ -122,8 +129,11 @@ window.addEventListener("DOMContentLoaded", () => {
 
         setTimeout(() => {
             lightbox.style.display = "none";
-            // 閉じた時に3Dモデル読み込みをクリア
-            if (lightbox3D) lightbox3D.removeAttribute("src");
+            // 閉じた際に3Dモデルの読み込みを一旦リセット
+            if (lightbox3D) {
+                lightbox3D.removeAttribute("src");
+                lightbox3D.style.display = "none";
+            }
         }, 300);
     }
 
