@@ -86,9 +86,10 @@ window.addEventListener("DOMContentLoaded", () => {
             lightboxImg.src = img.src;
         }
 
-        // テキストデータの反映
-        const fileName = img.src.split("/").pop();
-        const project = projects[fileName];
+        // 大文字小文字のズレを考慮してファイル名検索
+        const fileName = img.src.split("/").pop().toLowerCase();
+        const projectKey = Object.keys(projects).find(key => key.toLowerCase() === fileName);
+        const project = projects[projectKey];
 
         if(project){
             projectTitle.textContent = project.title;
@@ -121,7 +122,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
         setTimeout(() => {
             lightbox.style.display = "none";
-            // 閉じた時に3D回転をリセット
+            // 閉じた時に3Dモデル読み込みをクリア
             if (lightbox3D) lightbox3D.removeAttribute("src");
         }, 300);
     }

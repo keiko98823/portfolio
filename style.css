@@ -531,3 +531,20 @@ body{
     background-color: #111111;
     border-radius: 15px;
 }
+
+/* モーダル内の画像・3Dモデル表示エリアの調整 */
+.image-wrapper {
+    flex: 1;
+    min-width: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* 3Dモデル表示用タグのサイズとライティング調整 */
+#lightbox-3d {
+    width: 100%;
+    height: 400px;
+    background-color: #1a1a1a;
+    border-radius: 12px;
+}
