@@ -262,3 +262,30 @@ if (backToTopBtn) {
         });
     });
 }
+
+// ===============================
+// ナビゲーションのアクティブ自動切り替え（スクロールスパイ）
+// ===============================
+const sections = document.querySelectorAll("section, #projects");
+const navLinks = document.querySelectorAll(".sidebar nav ul li a");
+
+window.addEventListener("scroll", () => {
+    let currentSectionId = "";
+
+    sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.clientHeight;
+        
+        // 画面の中央付近にセクションが入ったらアクティブと判定
+        if (window.scrollY >= sectionTop - sectionHeight / 3) {
+            currentSectionId = section.getAttribute("id");
+        }
+    });
+
+    navLinks.forEach(link => {
+        link.classList.remove("active");
+        if (link.getAttribute("href") === `#${currentSectionId}`) {
+            link.classList.add("active");
+        }
+    });
+});

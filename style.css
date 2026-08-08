@@ -610,3 +610,27 @@ body{
     max-height: 100%;
     object-fit: contain;
 }
+
+
+/* ナビゲーションリンクの基本スタイル カーソルがあった他時に色が変わる*/
+.sidebar nav ul li a {
+    color: #888888; /* 通常時の文字色（グレー） */
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    transition: color 0.3s ease, transform 0.3s ease;
+    display: inline-block;
+}
+
+/* カーソルが当たった時（ホバー時） */
+.sidebar nav ul li a:hover {
+    color: #ffffff; /* ホバーで白に変化 */
+    transform: translateX(5px); /* 少し右にずれる演出 */
+}
+
+/* 現在表示中のセクション（アクティブ時） */
+.sidebar nav ul li a.active {
+    color: #4facfe; /* アクセントカラー（例: シアン・青系） */
+    font-weight: 700;
+}
