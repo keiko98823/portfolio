@@ -633,4 +633,72 @@ body{
 .sidebar nav ul li a.active {
     color: #4facfe; /* アクセントカラー（例: シアン・青系） */
     font-weight: 700;
+
+}
+
+/* モーダル全体枠 */
+.lightbox-content {
+  position: relative;
+  display: flex;
+  align-items: center; /* ボタンとコンテンツを上下中央揃え */
+  justify-content: space-between;
+  width: 90%;
+  max-width: 900px;
+  margin: auto;
+  background: #fff;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+/* ボタン（PC・スマホ共通の固定） */
+.nav-btn {
+  flex-shrink: 0; /* ボタンが潰れないように設定 */
+  background: transparent;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  z-index: 10;
+  padding: 10px;
+}
+
+/* 画像＋テキストのラッパー */
+.lightbox-body {
+  display: flex;
+  flex: 1;
+  min-width: 0; /* テキスト溢れ防止 */
+  gap: 20px;
+}
+
+/* --------------------------------------
+   【スマホ向け設定】（画面幅767px以下）
+-------------------------------------- */
+@media (max-width: 767px) {
+  .lightbox-body {
+    flex-direction: column; /* スマホでは画像とテキストを縦並びに */
+  }
+
+  .image-wrapper img,
+  model-viewer {
+    width: 100%;
+    max-height: 250px;
+    object-fit: contain;
+  }
+}
+
+/* --------------------------------------
+   【PC向け設定】（画面幅768px以上）
+-------------------------------------- */
+@media (min-width: 768px) {
+  .lightbox-body {
+    flex-direction: row; /* PCでは画像とテキストを横並びに */
+    align-items: center;
+  }
+
+  .image-wrapper {
+    flex: 1;
+  }
+
+  .info {
+    flex: 1;
+  }
 }
