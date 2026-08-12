@@ -779,3 +779,116 @@ body{
   background-color: #333333; /* ホバー時に黒背景 */
   color: #ffffff; /* 矢印を白に反転 */
 }
+
+
+/* ==========================================
+   モーダル（Lightbox）崩れ・ボタン位置修正
+   （CSSの一番最後に貼り付けてください）
+========================================== */
+
+/* 1. モーダル本体枠 */
+#lightbox .lightbox-content {
+  position: relative !important;
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  width: 90% !important;
+  max-width: 900px !important;
+  background: #ffffff !important;
+  padding: 30px 50px !important; /* 左右にボタン用のスペースを確保 */
+  border-radius: 20px !important;
+  box-sizing: border-box !important;
+}
+
+/* 2. 中央の画像・説明文エリア */
+#lightbox .image-wrapper {
+  flex: 1 1 auto !important;
+  width: 55% !important;
+  max-width: 55% !important;
+  height: auto !important;
+  margin: 0 !important;
+}
+
+#lightbox .info {
+  flex: 1 1 auto !important;
+  width: 40% !important;
+  padding-left: 20px !important;
+}
+
+#lightbox .info h2,
+#lightbox .info p,
+#lightbox .info span,
+#lightbox .info strong {
+  color: #333333 !important; /* 文字を黒色に強制指定 */
+}
+
+/* 3. 左右矢印ボタンの位置合わせ */
+#lightbox .nav-btn {
+  position: absolute !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  width: 44px !important;
+  height: 44px !important;
+  background-color: rgba(255, 255, 255, 0.9) !important;
+  color: #333333 !important;
+  border: 1px solid #dddddd !important;
+  border-radius: 50% !important;
+  font-size: 20px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  cursor: pointer !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15) !important;
+  z-index: 99 !important;
+}
+
+/* 左ボタンの位置（モーダル左端からの位置） */
+#lightbox #prev-btn {
+  left: 10px !important; /* 内側に置く場合は10px、少し外に出したい場合は -22px に変更 */
+  right: auto !important;
+}
+
+/* 右ボタンの位置（モーダル右端からの位置） */
+#lightbox #next-btn {
+  right: 10px !important; /* 内側に置く場合は10px、少し外に出したい場合は -22px に変更 */
+  left: auto !important;
+}
+
+#lightbox .nav-btn:hover {
+  background-color: #333333 !important;
+  color: #ffffff !important;
+}
+
+/* 4. ×ボタンの位置と色 */
+#lightbox .close {
+  position: absolute !important;
+  top: 15px !important;
+  right: 15px !important;
+  color: #333333 !important;
+  background: transparent !important;
+  font-size: 28px !important;
+}
+
+/* 5. スマホ（モバイル）表示時の位置調整 */
+@media (max-width: 768px) {
+  #lightbox .lightbox-content {
+    flex-direction: column !important;
+    padding: 40px 15px 20px 15px !important;
+  }
+
+  #lightbox .image-wrapper,
+  #lightbox .info {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding-left: 0 !important;
+  }
+
+  #lightbox #prev-btn {
+    left: 5px !important;
+  }
+
+  #lightbox #next-btn {
+    right: 5px !important;
+  }
+}
