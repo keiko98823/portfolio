@@ -210,33 +210,47 @@ body{
     pointer-events:auto;
 }
 
-.lightbox-content{
-    position:relative;
-    width:90%;
-    max-width:1300px;
-    background:#181818;
-    border-radius:20px;
-    padding:50px;
-    display:flex;
-    align-items:center;
-    gap:50px;
-    box-shadow:0 0 50px rgba(0,0,0,.6);
-    transform:scale(.9);
-    transition:.3s;
-    overflow: visible !important;
+/* ==========================================
+   モーダル全体枠の調整
+========================================== */
+.lightbox-content {
+  position: relative; /* 子要素（ボタン）の絶対配置の基準にする */
+  display: flex;
+  align-items: center;
+  width: 90%;
+  max-width: 900px;
+  margin: 100px auto; /* 上下に余白を持たせる */
+  background: #fff;
+  padding: 20px;
+  box-sizing: border-box;
+  border-radius: 20px; /* 画像に合わせた角丸 */
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3); /* モーダル自体への影 */
 }
 
 #lightbox.active .lightbox-content{
     transform:scale(1);
 }
 
-.image-wrapper{
-    position:relative;
-    width:65%;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    flex-shrink:0;
+/* 画像とテキストエリアの横並び設定（PC用） */
+.image-wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: row; /* 横並び */
+  align-items: center;
+  gap: 30px; /* 画像とテキストの間の余白 */
+  margin: 0 40px; /* 左右ボタンが被らないように余白を作る */
+}
+
+/* 画像自体の調整 */
+.image-wrapper img {
+  max-width: 50%; /* 画像の幅を少し抑える */
+  height: auto;
+  border-radius: 10px;
+}
+
+/* テキストエリアの調整 */
+.image-wrapper .info {
+  flex: 1;
 }
 
 #lightbox-img{
@@ -269,37 +283,40 @@ body{
     color:#ddd;
 }
 
-.nav-btn{
-    position:absolute;
-    top:50%;
-    transform:translateY(-50%);
-    width:60px;
-    height:60px;
-    border:none;
-    border-radius:50%;
-    background:rgba(255,255,255,.15);
-    color:white;
-    font-size:28px;
-    cursor:pointer;
-    transition:.3s;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    z-index:10;
+/* ==========================================
+   左右矢印ボタン（< >）の絶対配置
+========================================== */
+.nav-btn {
+  position: absolute; /* 絶対配置 */
+  top: 50%; /* 上下中央に配置 */
+  transform: translateY(-50%); /* 自身の高さ半分だけ上に戻して完全に中央へ */
+  background-color: rgba(255, 255, 255, 0.9); /* 白背景 */
+  color: #333333;
+  border: 1px solid #ddd;
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  transition: all 0.2s ease;
+  z-index: 10;
 }
 
-.nav-btn:hover{
-    background:white;
-    color:#111;
-    transform:translateY(-50%) scale(1.15);
+.nav-btn:hover {
+  background-color: #333333;
+  color: #ffffff;
 }
 
 #prev-btn{
-    left:-30px;
+    left:-22px;
 }
 
 #next-btn{
-    right:30px;
+    right: -22px;
     z-index:99999 !important;
 }
 
