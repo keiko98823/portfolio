@@ -702,3 +702,63 @@ body{
     flex: 1;
   }
 }
+
+/* ==========================================
+   モーダル（Lightbox）内のテキスト色調整
+========================================== */
+.lightbox-content .info {
+  color: #333333; /* 文字を読みやすい濃いグレー（または #000000）に変更 */
+}
+
+.lightbox-content .info h2,
+.lightbox-content .info p,
+.lightbox-content .info span,
+.lightbox-content .info strong {
+  color: #333333; /* 見出しや段落の文字を確実に黒系にする */
+}
+
+
+/* ==========================================
+   閉じるボタン（×）の調整
+========================================== */
+.lightbox-content .close {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  color: #333333; /* 白から黒系の色に変更 */
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 100;
+  transition: color 0.2s ease;
+}
+
+.lightbox-content .close:hover {
+  color: #ff4d4d; /* ホバー時に赤色にして分かりやすく */
+}
+
+
+/* ==========================================
+   左右矢印ボタン（< >）の調整
+========================================== */
+.nav-btn {
+  background-color: rgba(255, 255, 255, 0.9); /* 白背景をつけて背景画像と同化するのを防ぐ */
+  color: #333333; /* 矢印の色を黒に */
+  border: 1px solid #ddd;
+  border-radius: 50%; /* 丸ボタンにする */
+  width: 44px;
+  height: 44px;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15); /* 軽く影をつけて立体感を出す */
+  transition: all 0.2s ease;
+  z-index: 10;
+}
+
+.nav-btn:hover {
+  background-color: #333333; /* ホバー時に黒背景 */
+  color: #ffffff; /* 矢印を白に反転 */
+}
