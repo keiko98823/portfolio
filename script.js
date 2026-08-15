@@ -33,10 +33,10 @@ const projects = {
         time: "3時間",
         software: "Blender"
     },
-    "NeonLogo.png": {
-        title: "Neon Logo",
-        description: "ネオン風ロゴデザインです。",
-        time: "2時間",
+    "Snowglobe.png": {
+        title: "Snow Globe",
+        description: "スノードームを作成しました。",
+        time: "6時間",
         software: "Blender"
     }
 };
