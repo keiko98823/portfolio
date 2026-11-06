@@ -5,48 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Keiko Portfolio</title>
     <link rel="stylesheet" href="style.css">
-
-    <!-- 3Dモデル表示用ライブラリ (<model-viewer>) -->
-    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
 </head>
 
 <body>
 
 <canvas id="particles"></canvas>
-
-<section id="home" class="hero">
-
-    <div class="hero-content">
-
-        <p class="hero-subtitle">Creative Portfolio</p>
-
-        <h1>Keiko Yamamoto</h1>
-
-        <h2>
-            3DCG <br>
-            <span>&</span><br>
-            Web Design
-        </h2>
-
-        <p class="hero-text">
-            Creating digital experiences with
-            Blender and Web technologies.
-        </p>
-
-        <div class="skill-tags">
-            <span>Blender</span>
-            <span>HTML</span>
-            <span>CSS</span>
-            <span>JavaScript</span>
-        </div>
-
-        <a href="#projects" class="scroll-btn">
-            View Projects ↓
-        </a>
-
-    </div>
-
-</section>
 
 <div class="container">
 
@@ -55,7 +18,6 @@
 
         <nav>
             <ul>
-                <li><a href="#home">HOME</a></li>
                 <li><a href="#projects">PROJECTS</a></li>
                 <li><a href="#about">ABOUT</a></li>
                 <li><a href="#studio">STUDIO</a></li>
@@ -65,52 +27,60 @@
     </aside>
 
     <main class="gallery" id="projects">
+        <header class="hero">
+            <p class="eyebrow"><span class="sparkle">✳</span> CREATIVE PORTFOLIO <span class="eyebrow-line"></span> EST. 2026</p>
+            <h1>3DCG <span>&</span><br class="mobile-break"> WEB DESIGN<span class="title-sparkle">✦</span></h1>
+            <p class="hero-copy">Creating little things with a little imagination.</p>
+            <a class="hero-link" href="#projects">EXPLORE MY WORKS <span>↓</span></a>
+            <span class="hero-doodle doodle-one">✿</span>
+            <span class="hero-doodle doodle-two">✧</span>
+        </header>
 
-        <!-- 1. Lip (3Dモデルあり) -->
-        <div class="item" data-model="models/lip2.glb">
+        <div class="section-heading">
+            <span class="section-kicker">A LITTLE COLLECTION</span>
+            <h2>Selected Projects <span>✿</span></h2>
+            <p>小さなアイデアを、かたちに。</p>
+        </div>
+
+        <div class="item">
             <img src="images/lip.png" alt="Lipstick">
             <div class="overlay">
                 <h3>Lips</h3>
             </div>
         </div>
 
-        <!-- 2. Obake -->
-        <div class="item" data-model="models/obake.glb">
+        <div class="item">
             <img src="images/obake.png" alt="Obake">
             <div class="overlay">
                 <h3>Obake</h3>
             </div>
         </div>
 
-        <!-- 3. Balloon Dog -->
-        <div class="item" data-model="models/inu.glb">
+        <div class="item">
             <img src="images/balloondog.jpg" alt="Balloon Dog">
             <div class="overlay">
                 <h3>Balloon Dog</h3>
             </div>
         </div>
 
-        <!-- 4. Pumpkins (3Dモデルあり) -->
-        <div class="item" data-model="models/pumpkins2.glb">
+        <div class="item">
             <img src="images/pumpkins.PNG" alt="Pumpkins">
             <div class="overlay">
                 <h3>Pumpkins</h3>
             </div>
         </div>
 
-        <!-- 5. Ahiru (3Dモデルあり) -->
-        <div class="item" data-model="models/duck3.glb">
+        <div class="item">
             <img src="images/ahiru3.png" alt="Ahiru">
             <div class="overlay">
                 <h3>Ahiru</h3>
             </div>
         </div>
 
-        <!-- 6. Snow globe -->
-        <div class="item" data-model="models/Snowglobe.glb">
-            <img src="images/Snowglobe.png" alt="Snow globe">
+        <div class="item">
+            <img src="images/NeonLogo.png" alt="Neon Logo">
             <div class="overlay">
-                <h3>Snow Globe</h3>
+                <h3>Neon Logo</h3>
             </div>
         </div>
 
@@ -120,7 +90,7 @@
 
 <section id="about" class="about-section">
 
-    <h2>ABOUT</h2>
+    <p class="section-kicker">A LITTLE ABOUT ME</p>\n    <h2>ABOUT <span>✿</span></h2>
 
     <p>Blenderを使用した3DCG制作を行っています。</p>
 
@@ -141,7 +111,7 @@
 
 <section id="studio" class="about-section">
 
-    <h2>STUDIO</h2>
+    <p class="section-kicker">BEHIND THE SCENES</p>\n    <h2>STUDIO <span>✧</span></h2>
 
     <p>
         3DCG制作を中心に作品づくりを行っています。
@@ -152,70 +122,55 @@
 
 <section id="contact" class="about-section">
 
-    <h2>CONTACT</h2>
+    <p class="section-kicker">SAY HELLO</p>\n    <h2>CONTACT <span>♡</span></h2>
 
-    <p>Email:</p>
+    <p class="contact-note">制作のご相談・お仕事のご依頼は、メールまたはGitHubからお気軽にどうぞ。</p>\n    <p>Email</p>
 
-  
+    <p>GitHub</p>
 
 </section>
 
-<!-- Lightbox (モーダル) -->
+<!-- Lightbox -->
+
 <div id="lightbox" class="lightbox">
 
     <div class="lightbox-content">
 
         <span class="close">&times;</span>
 
-        <!-- 左ボタン -->
-        <button id="prev-btn" class="nav-btn">&#10094;</button>
+        <div class="image-wrapper">
 
-        <!-- メインコンテンツ（画像/3D + 説明文） -->
-        <div class="lightbox-body">
+            <button id="prev-btn" class="nav-btn">&#10094;</button>
 
-            <div class="image-wrapper">
-                <!-- 通常画像表示用 -->
-                <img id="lightbox-img" src="" alt="">
+            <img id="lightbox-img" src="" alt="">
 
-                <!-- 3Dモデル表示用 -->
-                <model-viewer 
-                    id="lightbox-3d" 
-                    src="" 
-                    camera-controls 
-                    auto-rotate 
-                    shadow-intensity="1"
-                    exposure="1.2"
-                    bounds="tight"
-                    style="display: none; width: 100%; height: 400px;">
-                </model-viewer>
-            </div>
-
-            <div class="info">
-                <h2 id="project-title"></h2>
-                <p id="project-description"></p>
-                <p>
-                    <strong>制作時間：</strong>
-                    <span id="project-time"></span>
-                </p>
-                <p>
-                    <strong>使用ソフト：</strong>
-                    <span id="project-software"></span>
-                </p>
-            </div>
+            <button id="next-btn" class="nav-btn">&#10095;</button>
 
         </div>
 
-        <!-- 右ボタン -->
-        <button id="next-btn" class="nav-btn">&#10095;</button>
+        <div class="info">
+
+            <h2 id="project-title"></h2>
+
+            <p id="project-description"></p>
+
+            <p>
+                <strong>制作時間：</strong>
+                <span id="project-time"></span>
+            </p>
+
+            <p>
+                <strong>使用ソフト：</strong>
+                <span id="project-software"></span>
+            </p>
+
+        </div>
 
     </div>
 
 </div>
 
-<!-- トップへ戻るボタン -->
-<button id="back-to-top" class="back-to-top" aria-label="トップへ戻る">↑</button>
-
 <script src="script.js"></script>
-</body>
 
+</body>
 </html>
