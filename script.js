@@ -23,6 +23,7 @@ const projects = {
         description: "バルーンアートをリアルな質感で制作しました。",
         time: "6時間",
         software: "Blender"
+        model: "models/inu.glb"
     },
     "pumpkins.PNG": {
         title: "Pumpkins",
