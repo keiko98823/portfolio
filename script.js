@@ -63,15 +63,40 @@ window.addEventListener("DOMContentLoaded", () => {
     // ===============================
     // 作品表示（モーダルを開く）
     // ===============================
-    function showProject(index){
-        currentIndex = index;
-        const img = images[currentIndex];
-        if(!img || !lightbox) return;
+   function showProject(index) {
+    currentIndex = index;
+    const img = images[currentIndex];
+    if (!img || !lightbox) return;
 
-        // 1. まず確実にモーダルを表示（この時点では opacity: 0）
-        lightbox.style.display = "flex";
+    lightbox.style.display = "flex";
 
-       const fileName = img.src.split("/").pop();
+    const fileName = img.src.split("/").pop();
+
+    // Snowglobeだけ3Dモデルを表示
+    if (fileName.toLowerCase() === "snowglobe.png") {
+        lightboxImg.style.display = "none";
+        snowglobeViewer.style.display = "block";
+    } else {
+        lightboxImg.style.display = "block";
+        snowglobeViewer.style.display = "none";
+        lightboxImg.src = img.src;
+    }
+
+    const project = projects[fileName];
+
+    if (project) {
+        projectTitle.textContent = project.title;
+        projectDescription.textContent = project.description;
+        projectTime.textContent = project.time;
+        projectSoftware.textContent = project.software;
+    }
+
+    requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+            lightbox.classList.add("active");
+        });
+    });
+}
 
 if (fileName.toLowerCase() === "snowglobe.png") {
     lightboxImg.style.display = "none";
