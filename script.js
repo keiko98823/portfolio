@@ -22,7 +22,7 @@ const projects = {
         title: "Balloon Dog",
         description: "バルーンアートをリアルな質感で制作しました。",
         time: "6時間",
-        software: "Blender"
+        software: "Blender",
         model: "models/inu.glb"
     },
     "pumpkins.PNG": {
