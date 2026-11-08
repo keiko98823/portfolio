@@ -49,6 +49,7 @@ window.addEventListener("DOMContentLoaded", () => {
     const images = document.querySelectorAll(".item img");
     const lightbox = document.getElementById("lightbox");
     const lightboxImg = document.getElementById("lightbox-img");
+    const snowglobeViewer = document.getElementById("snowglobe-viewer");
     const closeBtn = document.querySelector(".close");
 
     const projectTitle = document.getElementById("project-title");
@@ -70,7 +71,16 @@ window.addEventListener("DOMContentLoaded", () => {
         // 1. まず確実にモーダルを表示（この時点では opacity: 0）
         lightbox.style.display = "flex";
 
-        lightboxImg.src = img.src;
+       const fileName = img.src.split("/").pop();
+
+if (fileName.toLowerCase() === "snowglobe.png") {
+    lightboxImg.style.display = "none";
+    snowglobeViewer.style.display = "block";
+} else {
+    lightboxImg.style.display = "block";
+    snowglobeViewer.style.display = "none";
+    lightboxImg.src = img.src;
+}
         const fileName = img.src.split("/").pop();
         const project = projects[fileName];
 
