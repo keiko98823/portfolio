@@ -114,6 +114,16 @@ function showProject(index) {
 
         console.log("3Dモデル読み込み:", modelURL);
 
+        snowglobeViewer.addEventListener("load", () => {
+    console.log("3Dモデル読み込み成功！");
+});
+
+snowglobeViewer.addEventListener("error", (event) => {
+    console.log("3Dモデル読み込み失敗:", event);
+});
+
+console.log("現在の3DモデルURL:", snowglobeViewer.src);
+
     } else {
 
         // 3Dモデルがない場合は画像を表示
