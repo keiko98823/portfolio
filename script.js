@@ -69,53 +69,76 @@ window.addEventListener("DOMContentLoaded", () => {
     // 作品表示
     // ===============================
 
-    function showProject(index) {
+    
+function showProject(index) {
+    currentIndex = index;
 
-        currentIndex = index;
+    const img = images[currentIndex];
+    if (!img || !lightbox) return;
 
-        const img = images[currentIndex];
+    lightbox.style.display = "flex";
 
-        if (!img || !lightbox) return;
+    // 画像のファイル名を取得
+    const fileName = img.getAttribute("src").split("/").pop();
 
-        lightbox.style.display = "flex";
+    // 大文字・小文字の違いも吸収して作品を検索
+    const projectEntry = Object.entries(projects).find(
+        ([key]) => key.toLowerCase() === fileName.toLowerCase()
+    );
 
-        const fileName = img.src.split("/").pop();
-        const project = projects[fileName];
+    const project = projectEntry ? projectEntry[1] : null;
 
-        // 3Dモデルがある作品は3D表示
-        if (project && project.model && snowglobeViewer) {
+    console.log("選択した作品:", fileName);
+    console.log("作品データ:", project);
 
-            lightboxImg.style.display = "none";
-            snowglobeViewer.style.display = "block";
+    if (project && project.model && snowglobeViewer) {
 
-            snowglobeViewer.src = project.model;
-            snowglobeViewer.alt = project.title + " 3D Model";
+        // 画像を隠す
+        lightboxImg.style.display = "none";
 
-        } else {
+        // 3Dモデルを表示
+        snowglobeViewer.style.display = "block";
 
-            // 3Dモデルがない作品は画像表示
-            lightboxImg.style.display = "block";
-            snowglobeViewer.style.display = "none";
+        // モデルのURLを設定
+        const modelURL = new URL(
+            project.model,
+            document.baseURI
+        ).href;
 
-            lightboxImg.src = img.src;
-        }
+        snowglobeViewer.setAttribute("src", modelURL);
+        snowglobeViewer.setAttribute(
+            "alt",
+            project.title + " 3D Model"
+        );
 
-        // 作品情報を表示
-        if (project) {
+        console.log("3Dモデル読み込み:", modelURL);
 
-            projectTitle.textContent = project.title;
-            projectDescription.textContent = project.description;
-            projectTime.textContent = project.time;
-            projectSoftware.textContent = project.software;
+    } else {
 
-        }
+        // 3Dモデルがない場合は画像を表示
+        lightboxImg.style.display = "block";
+        snowglobeViewer.style.display = "none";
 
-        requestAnimationFrame(() => {
-            requestAnimationFrame(() => {
-                lightbox.classList.add("active");
-            });
-        });
+        lightboxImg.src = img.src;
+
+        console.log("3Dモデルが登録されていません");
     }
+
+    // 作品情報
+    if (project) {
+        projectTitle.textContent = project.title;
+        projectDescription.textContent = project.description;
+        projectTime.textContent = project.time;
+        projectSoftware.textContent = project.software;
+    }
+
+    requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+            lightbox.classList.add("active");
+        });
+    });
+}
+
 
     // ===============================
     // モーダルを閉じる
