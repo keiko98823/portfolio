@@ -836,3 +836,18 @@ a {
         height: 350px;
     }
 }
+
+/* Lightboxの表示を安定させる */
+.lightbox.active .lightbox-content {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    position: relative;
+    z-index: 10000;
+}
+
+.lightbox .close {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
