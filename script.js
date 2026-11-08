@@ -8,13 +8,15 @@ const projects = {
         title: "Lipstick",
         description: "高級感のある口紅をテーマに制作しました。",
         time: "4時間",
-        software: "Blender"
+        software: "Blender",
+        model: "models/lip2.glb"
     },
     "obake.png": {
         title: "Obake",
         description: "おばけを制作しました。",
         time: "4時間",
-        software: "Blender"
+        software: "Blender",
+        model: "models/obake.glb"
     },
     "balloondog.jpg": {
         title: "Balloon Dog",
@@ -26,19 +28,22 @@ const projects = {
         title: "Pumpkins",
         description: "ハロウィンをイメージした作品です。",
         time: "5時間",
-        software: "Blender"
+        software: "Blender",
+        model: "models/pumpkins2.glb"
     },
     "ahiru3.png": {
         title: "Ahiru",
         description: "アヒルを制作しました。",
         time: "3時間",
-        software: "Blender"
+        software: "Blender",
+        model: "models/duck3.glb"
     },
     "Snowglobe.png": {
         title: "Snowglobe",
         description: "スノードームをテーマに制作しました。",
         time: "制作時間",
-        software: "Blender"
+        software: "Blender",
+        model: "models/Snowglobe.glb"
     }
 };
 
@@ -60,33 +65,49 @@ window.addEventListener("DOMContentLoaded", () => {
     const prevBtn = document.getElementById("prev-btn");
     const nextBtn = document.getElementById("next-btn");
 
+    // ===============================
     // 作品表示
+    // ===============================
+
     function showProject(index) {
+
         currentIndex = index;
+
         const img = images[currentIndex];
+
         if (!img || !lightbox) return;
 
         lightbox.style.display = "flex";
 
         const fileName = img.src.split("/").pop();
+        const project = projects[fileName];
 
-        // Snowglobeだけ3Dモデルを表示
-        if (fileName.toLowerCase() === "snowglobe.png") {
+        // 3Dモデルがある作品は3D表示
+        if (project && project.model && snowglobeViewer) {
+
             lightboxImg.style.display = "none";
             snowglobeViewer.style.display = "block";
+
+            snowglobeViewer.src = project.model;
+            snowglobeViewer.alt = project.title + " 3D Model";
+
         } else {
+
+            // 3Dモデルがない作品は画像表示
             lightboxImg.style.display = "block";
             snowglobeViewer.style.display = "none";
+
             lightboxImg.src = img.src;
         }
 
-        const project = projects[fileName];
-
+        // 作品情報を表示
         if (project) {
+
             projectTitle.textContent = project.title;
             projectDescription.textContent = project.description;
             projectTime.textContent = project.time;
             projectSoftware.textContent = project.software;
+
         }
 
         requestAnimationFrame(() => {
@@ -96,8 +117,12 @@ window.addEventListener("DOMContentLoaded", () => {
         });
     }
 
+    // ===============================
     // モーダルを閉じる
+    // ===============================
+
     function closeLightbox() {
+
         if (!lightbox) return;
 
         lightbox.classList.remove("active");
@@ -107,104 +132,170 @@ window.addEventListener("DOMContentLoaded", () => {
         }, 300);
     }
 
+    // ===============================
     // 画像クリックで開く
+    // ===============================
+
     images.forEach((img, index) => {
+
         img.style.cursor = "pointer";
+
         img.addEventListener("click", () => {
             showProject(index);
         });
+
     });
 
+    // ===============================
     // 閉じるイベント
+    // ===============================
+
     if (closeBtn) {
         closeBtn.addEventListener("click", closeLightbox);
     }
 
     if (lightbox) {
+
         lightbox.addEventListener("click", (e) => {
+
             if (e.target === lightbox) {
                 closeLightbox();
             }
+
         });
+
     }
 
     document.addEventListener("keydown", (e) => {
+
         if (e.key === "Escape") {
             closeLightbox();
         }
+
     });
 
+    // ===============================
     // 前へ・次へボタン
+    // ===============================
+
     if (prevBtn) {
+
         prevBtn.addEventListener("click", () => {
+
             currentIndex--;
+
             if (currentIndex < 0) {
                 currentIndex = images.length - 1;
             }
+
             showProject(currentIndex);
+
         });
+
     }
 
     if (nextBtn) {
+
         nextBtn.addEventListener("click", () => {
+
             currentIndex++;
+
             if (currentIndex >= images.length) {
                 currentIndex = 0;
             }
+
             showProject(currentIndex);
+
         });
+
     }
 
+    // キーボードの左右キー
     document.addEventListener("keydown", (e) => {
-        if (lightbox && lightbox.style.display !== "flex") return;
 
-        if (e.key === "ArrowRight" && nextBtn) nextBtn.click();
-        if (e.key === "ArrowLeft" && prevBtn) prevBtn.click();
+        if (!lightbox || lightbox.style.display !== "flex") return;
+
+        if (e.key === "ArrowRight" && nextBtn) {
+            nextBtn.click();
+        }
+
+        if (e.key === "ArrowLeft" && prevBtn) {
+            prevBtn.click();
+        }
+
     });
 
+    // ===============================
     // 3Dチルトエフェクト
+    // ===============================
+
     const tiltItems = document.querySelectorAll(".item");
 
     tiltItems.forEach(item => {
+
         const img = item.querySelector("img");
+
         if (!img) return;
 
         item.addEventListener("mousemove", (e) => {
+
             const rect = item.getBoundingClientRect();
+
             const x = (e.clientX - rect.left) / rect.width;
             const y = (e.clientY - rect.top) / rect.height;
 
             const maxTilt = 15;
+
             const rotateX = (0.5 - y) * maxTilt;
             const rotateY = (x - 0.5) * maxTilt;
 
             img.style.transition = "none";
-            img.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
+
+            img.style.transform =
+                `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
+
         });
 
         item.addEventListener("mouseleave", () => {
-            img.style.transition = "transform 0.5s cubic-bezier(0.25, 1, 0.5, 1)";
-            img.style.transform = "rotateX(0deg) rotateY(0deg) scale(1)";
+
+            img.style.transition =
+                "transform 0.5s cubic-bezier(0.25, 1, 0.5, 1)";
+
+            img.style.transform =
+                "rotateX(0deg) rotateY(0deg) scale(1)";
+
         });
+
     });
 
 });
 
+// ===============================
 // スクロールフェードイン
+// ===============================
+
 const items = document.querySelectorAll(".item");
 
 const observer = new IntersectionObserver((entries) => {
+
     entries.forEach(entry => {
+
         if (entry.isIntersecting) {
+
             const index = [...items].indexOf(entry.target);
 
             setTimeout(() => {
+
                 entry.target.classList.add("show");
+
             }, index * 120);
 
             observer.unobserve(entry.target);
+
         }
+
     });
+
 }, { threshold: 0.2 });
 
 items.forEach(item => {
