@@ -968,3 +968,20 @@ a {
     visibility: visible !important;
     opacity: 1 !important;
 }
+
+/* Gallery layout fix: keep project cards in columns */
+#three-d-gallery.project-grid,
+#illustration-gallery.project-grid {
+    display: grid;
+    width: 100%;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    grid-auto-flow: row;
+    align-items: start;
+}
+
+@media (max-width: 900px) {
+    #three-d-gallery.project-grid,
+    #illustration-gallery.project-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    }
+}
