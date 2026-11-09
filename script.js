@@ -52,7 +52,7 @@ let currentIndex = 0;
 
 window.addEventListener("DOMContentLoaded", () => {
 
-    const images = document.querySelectorAll(".item img");
+    const images = document.querySelectorAll("#three-d-gallery .item img");
     const lightbox = document.getElementById("lightbox");
     const lightboxImg = document.getElementById("lightbox-img");
     const snowglobeViewer = document.getElementById("snowglobe-viewer");
@@ -65,6 +65,28 @@ window.addEventListener("DOMContentLoaded", () => {
 
     const prevBtn = document.getElementById("prev-btn");
     const nextBtn = document.getElementById("next-btn");
+
+    // ===============================
+    // ギャラリー切り替え
+    // ===============================
+    const tab3D = document.getElementById("tab-3d");
+    const tabIllustration = document.getElementById("tab-illustration");
+    const gallery3D = document.getElementById("three-d-gallery");
+    const illustrationGallery = document.getElementById("illustration-gallery");
+
+    function switchGallery(type) {
+        const show3D = type === "3d";
+        gallery3D.hidden = !show3D;
+        illustrationGallery.hidden = show3D;
+        tab3D.classList.toggle("active", show3D);
+        tabIllustration.classList.toggle("active", !show3D);
+        tab3D.setAttribute("aria-selected", String(show3D));
+        tabIllustration.setAttribute("aria-selected", String(!show3D));
+    }
+
+    tab3D.addEventListener("click", () => switchGallery("3d"));
+    tabIllustration.addEventListener("click", () => switchGallery("illustration"));
+
 
     // ===============================
     // 作品表示
@@ -114,15 +136,7 @@ function showProject(index) {
 
         console.log("3Dモデル読み込み:", modelURL);
 
-        snowglobeViewer.addEventListener("load", () => {
-    console.log("3Dモデル読み込み成功！");
-});
-
-snowglobeViewer.addEventListener("error", (event) => {
-    console.log("3Dモデル読み込み失敗:", event);
-});
-
-console.log("現在の3DモデルURL:", snowglobeViewer.src);
+        console.log("現在の3DモデルURL:", snowglobeViewer.src);
 
     } else {
 
@@ -178,6 +192,26 @@ console.log("現在の3DモデルURL:", snowglobeViewer.src);
             showProject(index);
         });
 
+    });
+
+    // イラストカードは画像をそのまま拡大表示
+    illustrationGallery.querySelectorAll(".item img").forEach((img) => {
+        img.style.cursor = "pointer";
+        img.addEventListener("click", () => {
+            const card = img.closest(".item");
+            lightboxImg.src = img.src;
+            lightboxImg.alt = img.alt || "Illustration";
+            lightboxImg.style.display = "block";
+            snowglobeViewer.style.display = "none";
+            projectTitle.textContent = card.dataset.title || img.alt || "Illustration";
+            projectDescription.textContent = card.dataset.description || "";
+            projectTime.textContent = card.dataset.time || "—";
+            projectSoftware.textContent = card.dataset.software || "—";
+            prevBtn.style.display = "none";
+            nextBtn.style.display = "none";
+            lightbox.style.display = "flex";
+            requestAnimationFrame(() => requestAnimationFrame(() => lightbox.classList.add("active")));
+        });
     });
 
     // ===============================
