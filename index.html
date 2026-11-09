@@ -47,6 +47,12 @@ src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.j
             <p>小さなアイデアを、かたちに。</p>
         </div>
 
+        <div class="gallery-tabs" role="tablist" aria-label="作品ギャラリー">
+            <button class="gallery-tab active" id="tab-3d" type="button" role="tab" aria-selected="true" aria-controls="three-d-gallery">3D GALLERY</button>
+            <button class="gallery-tab" id="tab-illustration" type="button" role="tab" aria-selected="false" aria-controls="illustration-gallery">ILLUSTRATION GALLERY</button>
+        </div>
+
+        <div class="project-grid" id="three-d-gallery" role="tabpanel" aria-labelledby="tab-3d">
         <div class="item">
             <img src="images/lip.png" alt="Lipstick">
             <div class="overlay">
@@ -86,6 +92,16 @@ src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.j
             <img src="images/Snowglobe.png" alt="Snowglobe">
             <div class="overlay">
                 <h3>Snowglobe</h3>
+            </div>
+        </div>
+        </div>
+
+        <div class="project-grid illustration-grid" id="illustration-gallery" role="tabpanel" aria-labelledby="tab-illustration" hidden>
+            <div class="gallery-empty">
+                <span class="empty-sparkle">✦</span>
+                <h3>Illustrations are coming soon!</h3>
+                <p>ここにイラスト作品を追加していきます。</p>
+                <span class="empty-note">画像を images/illustrations/ に入れてね</span>
             </div>
         </div>
 
